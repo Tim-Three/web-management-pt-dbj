@@ -10,8 +10,22 @@ class KaryawanController extends Controller
 {
     public function index()
     {
-        $karyawan = User::where('role', 'karyawan')->paginate(15);
-        return view('admin.karyawan.index', compact('karyawan'));
+        $today = \Carbon\Carbon::today();
+
+        $totalKaryawan = User::where('role', 'karyawan')->count();
+
+        $absensiHariIni = \App\Models\Absensi::whereDate('tanggal', $today)->get();
+        $hadir = $absensiHariIni->whereIn('status', ['hadir', 'telat'])->count();
+        $telat  = $absensiHariIni->where('status', 'telat')->count();
+        $izin   = $absensiHariIni->where('status', 'izin')->count();
+
+        $karyawan = User::where('role', 'karyawan')
+            ->with(['absensis' => fn($q) => $q->whereDate('tanggal', $today)])
+            ->paginate(15);
+
+        return view('admin.karyawan.index', compact(
+            'karyawan', 'totalKaryawan', 'hadir', 'telat', 'izin'
+        ));
     }
 
     public function create()

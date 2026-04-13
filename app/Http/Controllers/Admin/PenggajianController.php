@@ -9,15 +9,25 @@ use Illuminate\Http\Request;
 
 class PenggajianController extends Controller
 {
-    public function index()
-    {
-        $bulanIni = Carbon::now()->format('Y-m');
+    public function index(Request $request)
+    {  
+        $bulanIni = $request->bulan ?? Carbon::now()->format('Y-m');
+
         $penggajian = Penggajian::with('user')
             ->where('bulan', $bulanIni)
             ->paginate(15);
+
         $karyawan = User::where('role', 'karyawan')->get();
 
-        return view('admin.penggajian.index', compact('penggajian', 'karyawan', 'bulanIni'));
+        $totalGaji         = Penggajian::where('bulan', $bulanIni)->sum('total_gaji');
+        $totalSudahDibayar = Penggajian::where('bulan', $bulanIni)->where('status', 'sudah_dibayar')->sum('total_gaji');
+        $totalBelumDibayar = Penggajian::where('bulan', $bulanIni)->where('status', 'belum_dibayar')->sum('total_gaji');
+        $jumlahBelumDibayar = Penggajian::where('bulan', $bulanIni)->where('status', 'belum_dibayar')->count();
+
+        return view('admin.penggajian.index', compact(
+            'penggajian', 'karyawan', 'bulanIni',
+            'totalGaji', 'totalSudahDibayar', 'totalBelumDibayar', 'jumlahBelumDibayar'
+        ));
     }
 
     public function store(Request $request)
