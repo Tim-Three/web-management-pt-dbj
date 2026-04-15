@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 class PenggajianController extends Controller
 {
     public function index(Request $request)
-    {  
+    {
         $bulanIni = $request->bulan ?? Carbon::now()->format('Y-m');
 
         $penggajian = Penggajian::with('user')
@@ -19,14 +20,22 @@ class PenggajianController extends Controller
 
         $karyawan = User::where('role', 'karyawan')->get();
 
-        $totalGaji         = Penggajian::where('bulan', $bulanIni)->sum('total_gaji');
-        $totalSudahDibayar = Penggajian::where('bulan', $bulanIni)->where('status', 'sudah_dibayar')->sum('total_gaji');
-        $totalBelumDibayar = Penggajian::where('bulan', $bulanIni)->where('status', 'belum_dibayar')->sum('total_gaji');
-        $jumlahBelumDibayar = Penggajian::where('bulan', $bulanIni)->where('status', 'belum_dibayar')->count();
+        $semuaGajiBulan = Penggajian::where('bulan', $bulanIni)->get();
+        $totalSudahDibayar  = $semuaGajiBulan->where('status', 'sudah_dibayar')->sum('total_gaji');
+        $totalBelumDibayar  = $semuaGajiBulan->where('status', 'belum_dibayar')->sum('total_gaji');
+        $jumlahSudahDibayar = $semuaGajiBulan->where('status', 'sudah_dibayar')->count();
+        $jumlahBelumDibayar = $semuaGajiBulan->where('status', 'belum_dibayar')->count();
+        $totalGaji          = $semuaGajiBulan->sum('total_gaji');
 
         return view('admin.penggajian.index', compact(
-            'penggajian', 'karyawan', 'bulanIni',
-            'totalGaji', 'totalSudahDibayar', 'totalBelumDibayar', 'jumlahBelumDibayar'
+            'penggajian',
+            'karyawan',
+            'bulanIni',
+            'totalGaji',
+            'totalSudahDibayar',
+            'totalBelumDibayar',
+            'jumlahSudahDibayar',
+            'jumlahBelumDibayar'
         ));
     }
 

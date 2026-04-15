@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Karyawan;
 
 use App\Http\Controllers\Controller;
@@ -13,6 +14,20 @@ class BerandaController extends Controller
     {
         $user = auth()->user();
         $today = Carbon::today();
+
+        // Auto set status izin kalau lagi cuti & belum ada record absen hari ini
+        $cutiAktif = Cuti::where('user_id', $user->id)
+            ->where('status', 'disetujui')
+            ->where('dari', '<=', $today)
+            ->where('sampai', '>=', $today)
+            ->first();
+
+        if ($cutiAktif) {
+            Absensi::firstOrCreate(
+                ['user_id' => $user->id, 'tanggal' => $today],
+                ['status'  => 'izin']
+            );
+        }
 
         $absensiHariIni = Absensi::where('user_id', $user->id)
             ->whereDate('tanggal', $today)
@@ -35,8 +50,12 @@ class BerandaController extends Controller
             ->get();
 
         return view('karyawan.beranda', compact(
-            'user', 'absensiHariIni', 'cutiAktif',
-            'riwayatAbsen', 'riwayatCuti', 'today'
+            'user',
+            'absensiHariIni',
+            'cutiAktif',
+            'riwayatAbsen',
+            'riwayatCuti',
+            'today'
         ));
     }
 }

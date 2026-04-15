@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers\Karyawan;
 
 use App\Http\Controllers\Controller;
 use App\Models\Absensi;
+use App\Models\Cuti;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -12,6 +14,16 @@ class AbsensiController extends Controller
     {
         $user = auth()->user();
         $today = Carbon::today();
+
+        $cutiAktif = Cuti::where('user_id', $user->id)
+            ->where('status', 'disetujui')
+            ->where('dari', '<=', $today)
+            ->where('sampai', '>=', $today)
+            ->first();
+
+        if ($cutiAktif) {
+            return back()->with('error', 'Anda sedang dalam masa cuti, tidak perlu absen.');
+        }
 
         $existing = Absensi::where('user_id', $user->id)
             ->whereDate('tanggal', $today)

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('page-title', 'Riwayat Pengajuan Cuti')
+@section('page-subtitle', 'Pantau dan kelola pengajuan cuti karyawan.')
 
 @section('sidebar-menu')
     <a href="{{ route('admin.beranda') }}" class="flex items-center gap-3 px-2 py-2 rounded-lg text-gray-600 hover:bg-gray-50 text-sm mb-1">
