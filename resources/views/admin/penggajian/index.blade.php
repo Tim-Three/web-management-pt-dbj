@@ -111,7 +111,7 @@
     <div class="grid grid-cols-3 gap-6">
 
         {{-- Tabel Penggajian (2/3 lebar) --}}
-        <div class="col-span-2 bg-white rounded-2xl border border-gray-100 overflow-hidden">
+        <div class="col-span-2 bg-white rounded-2xl border border-gray-100 overflow-hidden h-fit">
             <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
                 <p class="font-semibold text-gray-800">Data penggajian</p>
                 {{-- Filter Bulan dengan icon kalender --}}
@@ -147,57 +147,60 @@
                     <tbody class="divide-y divide-gray-50">
                         @forelse($penggajian as $gaji)
                             <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-5 py-3">
+                                <td class="px-5 py-4 whitespace-nowrap">
                                     <div class="flex items-center gap-3">
                                         <img src="{{ $gaji->user->foto ? Storage::url($gaji->user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($gaji->user->name) . '&background=6366f1&color=fff' }}"
-                                            class="w-8 h-8 rounded-full flex-shrink-0 object-cover">
+                                            class="w-9 h-9 rounded-full flex-shrink-0 object-cover">
                                         <div>
-                                            <p class="font-medium text-gray-800">{{ $gaji->user->name }}</p>
-                                            <p class="text-xs text-gray-400">{{ $gaji->user->nip ?? '-' }}</p>
+                                            <p class="font-semibold text-gray-800">{{ $gaji->user->name }}</p>
+                                            <p class="text-[11px] text-gray-400">{{ $gaji->user->nip ?? '-' }}</p>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-5 py-3 text-gray-500 text-xs">{{ $gaji->user->posisi ?? '-' }}</td>
-                                <td class="px-5 py-3 text-right text-gray-600 text-xs">
-                                    Rp{{ number_format($gaji->gaji_pokok, 0, ',', '.') }}</td>
-                                <td class="px-5 py-3 text-right text-green-600 text-xs">
-                                    Rp{{ number_format($gaji->tunjangan, 0, ',', '.') }}</td>
-                                <td class="px-5 py-3 text-right text-red-500 text-xs">
-                                    Rp{{ number_format($gaji->potongan, 0, ',', '.') }}</td>
-                                <td class="px-5 py-3 text-right font-semibold text-gray-800 text-xs">
-                                    Rp{{ number_format($gaji->total_gaji, 0, ',', '.') }}</td>
-                                <td class="px-5 py-3 text-center">
+                                <td class="px-5 py-4 text-gray-500 whitespace-nowrap text-xs">
+                                    {{ $gaji->user->posisi ?? '-' }}
+                                </td>
+                                <td class="px-5 py-4 text-right text-gray-600 whitespace-nowrap text-xs">
+                                    Rp{{ number_format($gaji->gaji_pokok, 0, ',', '.') }}
+                                </td>
+                                <td class="px-5 py-4 text-right text-green-600 whitespace-nowrap text-xs font-medium">
+                                    + Rp{{ number_format($gaji->tunjangan, 0, ',', '.') }}
+                                </td>
+                                <td class="px-5 py-4 text-right text-red-500 whitespace-nowrap text-xs font-medium">
+                                    - Rp{{ number_format($gaji->potongan, 0, ',', '.') }}
+                                </td>
+                                <td class="px-5 py-4 text-right font-bold text-gray-800 whitespace-nowrap text-xs">
+                                    Rp{{ number_format($gaji->total_gaji, 0, ',', '.') }}
+                                </td>
+                                <td class="px-5 py-4 text-center whitespace-nowrap">
                                     @if ($gaji->status === 'sudah_dibayar')
                                         <span
-                                            class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">Sudah
-                                            dibayar</span>
+                                            class="px-3 py-1.5 rounded-full text-[10px] font-bold uppercase bg-green-100 text-green-700">
+                                            Sudah dibayar
+                                        </span>
                                     @else
                                         <span
-                                            class="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">Belum
-                                            dibayar</span>
+                                            class="px-3 py-1.5 rounded-full text-[10px] font-bold uppercase bg-yellow-100 text-yellow-700">
+                                            Belum dibayar
+                                        </span>
                                     @endif
                                 </td>
-                                <td class="px-5 py-3 text-center">
+                                <td class="px-5 py-4 text-center whitespace-nowrap">
                                     @if ($gaji->status === 'belum_dibayar')
                                         <form method="POST" action="{{ route('admin.penggajian.bayar', $gaji) }}">
                                             @csrf
                                             @method('PATCH')
                                             <button type="submit"
-                                                class="px-3 py-1.5 bg-green-600 text-white text-xs font-semibold rounded-lg hover:bg-green-700 transition">
+                                                class="px-4 py-2 bg-green-600 text-white text-[11px] font-bold rounded-xl hover:bg-green-700 transition shadow-sm active:scale-95">
                                                 Tandai dibayar
                                             </button>
                                         </form>
                                     @else
-                                        <span class="text-xs text-gray-300">—</span>
+                                        <span class="text-xs text-gray-300 font-medium">— Selesai —</span>
                                     @endif
                                 </td>
                             </tr>
                         @empty
-                            <tr>
-                                <td colspan="8" class="px-6 py-10 text-center text-gray-400 text-sm">
-                                    Belum ada data penggajian untuk bulan ini.
-                                </td>
-                            </tr>
                         @endforelse
                     </tbody>
                 </table>
