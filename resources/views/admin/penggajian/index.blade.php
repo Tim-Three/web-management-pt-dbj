@@ -36,7 +36,7 @@
         Analisis Keuangan
     </a>
     <a href="{{ route('admin.penggajian.index') }}"
-        class="flex items-center gap-3 px-2 py-2 rounded-lg bg-green-50 text-green-700 font-medium text-sm mb-1">
+        class="flex items-center gap-3 px-2 py-2 rounded-lg bg-green-600 md:bg-green-50 text-white md:text-green-700 font-medium text-sm mb-1">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -168,12 +168,10 @@
                                     Rp{{ number_format($gaji->total_gaji, 0, ',', '.') }}</td>
                                 <td class="px-5 py-3 text-center">
                                     @if ($gaji->status === 'sudah_dibayar')
-                                        <span
-                                            class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">Sudah
+                                        <span class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">Sudah
                                             dibayar</span>
                                     @else
-                                        <span
-                                            class="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">Belum
+                                        <span class="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">Belum
                                             dibayar</span>
                                     @endif
                                 </td>
@@ -235,8 +233,7 @@
                                 @endforeach
                             </select>
                             <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M19 9l-7 7-7-7" />
                                 </svg>
@@ -250,8 +247,7 @@
                             <input type="month" name="bulan" value="{{ $bulanIni }}" required
                                 class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500">
                             <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
@@ -261,8 +257,7 @@
 
                     <div>
                         <label class="text-xs text-gray-400 mb-1 block">Gaji pokok (Rp)</label>
-                        <input type="number" name="gaji_pokok" id="gaji_pokok" value="0" required
-                            oninput="hitungTotal()"
+                        <input type="number" name="gaji_pokok" id="gaji_pokok" value="0" required oninput="hitungTotal()"
                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500">
                     </div>
 
