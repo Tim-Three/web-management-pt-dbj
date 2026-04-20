@@ -118,9 +118,9 @@ class KaryawanController extends Controller
             $data['foto'] = $request->file('foto')->store('foto-karyawan', 'public');
         }
 
-        if ($request->filled('password')) {
-            $data['password'] = Hash::make($request->password);
-        }
+        // if ($request->filled('password')) {
+        //     $data['password'] = Hash::make($request->password);
+        // }
 
         $karyawan->update($data);
 
