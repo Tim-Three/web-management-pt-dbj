@@ -41,7 +41,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        Penggajian
+        Kelola Gaji Karyawan
     </a>
 @endsection
 
@@ -56,7 +56,7 @@
             {{-- Total Karyawan Card (hijau) --}}
             <div class="bg-green-600 rounded-2xl p-4 md:p-5 flex items-start justify-between min-h-28 w-1/2 md:w-full">
                 <div>
-                    <p class="text-green-200 text-3xs md:text-xs mb-2 md:mb-3">Total karyawan</p>
+                    <p class="text-green-200 text-2xs md:text-xs mb-2 md:mb-3">Total karyawan</p>
                     <p class="text-2xl md:text-5xl font-bold text-white">{{ $totalKaryawan }}</p>
                 </div>
                 <div class="min-w-8 h-8 md:w-9 md:h-9 bg-white rounded-xl flex items-center justify-center">
@@ -71,19 +71,19 @@
             <div
                 class="bg-white rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between min-h-28 w-1/2 md:w-full">
                 <div class="flex-1">
-                    <p class="text-3xs md:text-xs text-gray-400 mb-2 md:mb-4">Detail kehadiran <br> hari ini</p>
+                    <p class="text-2xs md:text-xs text-gray-400 mb-2 md:mb-4">Detail kehadiran <br> hari ini</p>
                     <div class="flex justify-start gap-2 md:gap-10">
                         <div>
                             <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $hadir }}</p>
-                            <p class="text-3xs md:text-xs text-gray-400 mt-1">Hadir</p>
+                            <p class="text-2xs md:text-xs text-gray-400 mt-1">Hadir</p>
                         </div>
                         <div>
-                            <p class="text-2xl md:text-3xl font-bold text-yellow-400">{{ $telat }}</p>
-                            <p class="text-3xs md:text-xs text-gray-400 mt-1">Telat</p>
+                            <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $telat }}</p>
+                            <p class="text-2xs md:text-xs text-gray-400 mt-1">Telat</p>
                         </div>
                         <div>
-                            <p class="text-2xl md:text-3xl font-bold text-blue-400">{{ $izin }}</p>
-                            <p class="text-3xs md:text-xs text-gray-400 mt-1">Izin</p>
+                            <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $izin }}</p>
+                            <p class="text-2xs md:text-xs text-gray-400 mt-1">Izin</p>
                         </div>
                     </div>
                 </div>

@@ -41,29 +41,29 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        Penggajian
+        Kelola Gaji Karyawan
     </a>
 @endsection
 @section('content')
     {{-- Summary Cards --}}
-    <div class="grid grid-cols-4 gap-4 mb-6">
-        <div class="bg-white rounded-2xl p-5 border border-gray-100">
-            <p class="text-xs text-gray-400 mb-2">Total gaji di bulan ini</p>
-            <p class="text-xl font-bold text-green-600">Rp{{ number_format($totalGajiBulanIni, 0, ',', '.') }}</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-gray-500 md:bg-white rounded-2xl p-5 border border-gray-100">
+            <p class="text-xs text-white md:text-gray-400 mb-2">Total gaji di bulan ini</p>
+            <p class="text-xl font-bold text-white md:text-green-600">Rp{{ number_format($totalGajiBulanIni, 0, ',', '.') }}</p>
         </div>
-        <div class="bg-white rounded-2xl p-5 border border-gray-100">
-            <p class="text-xs text-gray-400 mb-2">Total pendapatan di bulan ini</p>
-            <p class="text-xl font-bold text-green-600">
+        <div class="bg-gray-500 md:bg-white rounded-2xl p-5 border border-gray-100">
+            <p class="text-xs text-white md:text-gray-400 mb-2">Total pendapatan di bulan ini</p>
+            <p class="text-xl font-bold text-white md:text-green-600">
                 Rp{{ number_format($keuanganBulanIni?->total_pendapatan ?? 0, 0, ',', '.') }}</p>
         </div>
-        <div class="bg-white rounded-2xl p-5 border border-gray-100">
-            <p class="text-xs text-gray-400 mb-2">Total pengeluaran di bulan ini</p>
-            <p class="text-xl font-bold text-red-500">
+        <div class="bg-red-500 md:bg-white rounded-2xl p-5 border border-gray-100">
+            <p class="text-xs text-white md:text-gray-400 mb-2">Total pengeluaran di bulan ini</p>
+            <p class="text-xl font-bold text-white md:text-red-500">
                 Rp{{ number_format($keuanganBulanIni?->total_pengeluaran ?? 0, 0, ',', '.') }}</p>
         </div>
-        <div class="bg-white rounded-2xl p-5 border border-gray-100">
-            <p class="text-xs text-gray-400 mb-2">Total keuntungan di bulan ini</p>
-            <p class="text-xl font-bold text-green-600">
+        <div class="bg-green-600 md:bg-white rounded-2xl p-5 border border-gray-100">
+            <p class="text-xs text-white md:text-gray-400 mb-2">Total keuntungan di bulan ini</p>
+            <p class="text-xl font-bold text-white md:text-green-600">
                 Rp{{ number_format($keuanganBulanIni?->keuntungan ?? 0, 0, ',', '.') }}</p>
         </div>
     </div>

@@ -41,29 +41,63 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        Penggajian
+        Kelola Gaji Karyawan
     </a>
 @endsection
 
 @section('content')
 
     {{-- Summary Cards --}}
-    <div class="grid grid-cols-4 gap-4 mb-6">
-        <div class="bg-white rounded-2xl p-5 border border-gray-100">
-            <p class="text-xs text-gray-400 mb-2">Total karyawan</p>
-            <p class="text-3xl font-bold text-gray-800">{{ $totalKaryawan }}</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-green-600 rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between">
+            <div>
+                <p class="text-green-200 text-2xs md:text-xs mb-2 md:mb-3">Total karyawan</p>
+                <p class="text-2xl md:text-5xl font-bold text-white">{{ $totalKaryawan }}</p>
+            </div>
+            <div class="min-w-8 h-8 md:w-9 md:h-9 bg-white rounded-xl flex items-center justify-center">
+                <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </div>
         </div>
-        <div class="bg-white rounded-2xl p-5 border border-gray-100">
+        <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
             <p class="text-xs text-gray-400 mb-2">Hadir hari ini</p>
-            <p class="text-3xl font-bold text-green-600">{{ $hadir }}</p>
+            <p class="text-3xl font-bold text-gray-800">{{ $hadir }}</p>
         </div>
-        <div class="bg-white rounded-2xl p-5 border border-gray-100">
+        <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
             <p class="text-xs text-gray-400 mb-2">Telat hari ini</p>
-            <p class="text-3xl font-bold text-yellow-500">{{ $telat }}</p>
+            <p class="text-3xl font-bold text-gray-800">{{ $telat }}</p>
         </div>
-        <div class="bg-white rounded-2xl p-5 border border-gray-100">
+        <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
             <p class="text-xs text-gray-400 mb-2">Izin/Cuti hari ini</p>
-            <p class="text-3xl font-bold text-blue-500">{{ $izin }}</p>
+            <p class="text-3xl font-bold text-gray-800">{{ $izin }}</p>
+        </div>
+        {{-- Hadir, Telat, Izin Hari Ini Tampilan HP --}}
+        <div class="bg-white rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between md:hidden">
+            <div class="flex-1">
+                <p class="text-2xs md:text-xs text-gray-400 mb-2 md:mb-4">Detail kehadiran <br> hari ini</p>
+                <div class="flex justify-start gap-2 md:gap-10">
+                    <div>
+                        <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $hadir }}</p>
+                        <p class="text-3xs md:text-xs text-gray-400 mt-1">Hadir</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $telat }}</p>
+                        <p class="text-3xs md:text-xs text-gray-400 mt-1">Telat</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $izin }}</p>
+                        <p class="text-3xs md:text-xs text-gray-400 mt-1">Izin</p>
+                    </div>
+                </div>
+            </div>
+            <div class="min-w-8 h-8 md:w-9 md:h-9 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+            </div>
         </div>
     </div>
 
@@ -71,11 +105,11 @@
     <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
             <div>
-                <h2 class="font-semibold text-gray-800">Daftar karyawan</h2>
-                <p class="text-xs text-gray-400 mt-0.5">{{ $karyawan->total() }} karyawan terdaftar</p>
+                <h2 class="text-sm md:text-base font-semibold text-gray-800">Daftar karyawan</h2>
+                <p class="text-2xs md:text-xs text-gray-400 mt-0.5">{{ $karyawan->total() }} karyawan terdaftar</p>
             </div>
             <button onclick="document.getElementById('modal-tambah').classList.remove('hidden')"
-                class="flex items-center gap-2 px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-xl hover:bg-green-700 transition">
+                class="flex items-center gap-2 px-4 py-2 bg-green-600 text-white text-xs md:text-sm font-semibold rounded-xl hover:bg-green-700 transition">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
@@ -83,16 +117,16 @@
             </button>
         </div>
 
-        <table class="w-full text-sm">
-            <thead class="bg-gray-50 text-gray-400 text-xs">
+        <table class="w-full text-3xs md:text-sm min-w-full">
+            <thead class="bg-gray-50 text-gray-400 text-2xs md:text-xs">
                 <tr>
-                    <th class="px-6 py-3 text-left">Nama</th>
-                    <th class="px-6 py-3 text-left">Posisi</th>
-                    <th class="px-6 py-3 text-left">Email</th>
-                    <th class="px-6 py-3 text-left">No. Telp</th>
-                    <th class="px-6 py-3 text-left">Domisili</th>
-                    <th class="px-6 py-3 text-center">Status</th>
-                    <th class="px-6 py-3 text-center">Aksi</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Nama</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden sm:table-cell">Posisi</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">Email</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden lg:table-cell">No. Telp</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden xl:table-cell">Domisili</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Status</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Aksi</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-50">
@@ -106,30 +140,39 @@
                             default => ['bg-red-100 text-red-600', 'Alpha'],
                         };
                     @endphp
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-3">
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-3 md:px-6 py-2 md:py-4">
+                            <div class="flex items-center gap-2 md:gap-3">
                                 <img src="{{ $k->foto ? Storage::url($k->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($k->name) . '&background=6366f1&color=fff' }}"
-                                    class="w-9 h-9 rounded-full flex-shrink-0 object-cover">
+                                    class="w-8 h-8 md:w-9 md:h-9 rounded-full flex-shrink-0 object-cover">
                                 <div>
-                                    <p class="font-medium text-gray-800">{{ $k->name }}</p>
-                                    <p class="text-xs text-gray-400">{{ $k->nip ?? '-' }}</p>
+                                    <p class="font-medium text-gray-800 text-2xs md:text-sm">{{ $k->name }}</p>
+                                    <p class="text-3xs md:text-xs text-gray-400">{{ $k->nip ?? '-' }}</p>
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-4 text-gray-500">{{ $k->posisi ?? '-' }}</td>
-                        <td class="px-6 py-4 text-gray-500">{{ $k->email }}</td>
-                        <td class="px-6 py-4 text-gray-500">{{ $k->no_telp ?? '-' }}</td>
-                        <td class="px-6 py-4 text-gray-500">{{ $k->domisili ?? '-' }}</td>
-                        <td class="px-6 py-4 text-center">
-                            <span class="px-2.5 py-1 rounded-full text-xs font-medium {{ $badge[0] }}">
+                        <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden sm:table-cell">
+                            {{ $k->posisi ?? '-' }}
+                        </td>
+                        <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden md:table-cell">
+                            {{ $k->email }}
+                        </td>
+                        <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden lg:table-cell">
+                            {{ $k->no_telp ?? '-' }}
+                        </td>
+                        <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden xl:table-cell">
+                            {{ $k->domisili ?? '-' }}
+                        </td>
+                        <td class="px-3 md:px-6 py-2 md:py-4 text-center">
+                            <span
+                                class="px-1.5 py-0.5 md:px-2.5 md:py-1 rounded-full text-3xs md:text-xs font-medium {{ $badge[0] }}">
                                 {{ $badge[1] }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-center">
-                            <div class="flex items-center justify-center gap-2">
+                        <td class="px-3 md:px-6 py-2 md:py-4 text-center">
+                            <div class="flex items-center justify-center gap-1 md:gap-2">
                                 <a href="{{ route('admin.karyawan.edit', $k) }}"
-                                    class="px-3 py-1.5 bg-gray-100 text-gray-600 text-xs font-medium rounded-lg hover:bg-gray-200 transition">
+                                    class="px-2 py-1 md:px-3 md:py-1.5 bg-gray-100 text-gray-600 text-3xs md:text-xs font-medium rounded-lg hover:bg-gray-200 transition">
                                     Edit
                                 </a>
                                 <form method="POST" action="{{ route('admin.karyawan.destroy', $k) }}"
@@ -137,7 +180,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                        class="px-3 py-1.5 bg-red-100 text-red-600 text-xs font-medium rounded-lg hover:bg-red-200 transition">
+                                        class="px-2 py-1 md:px-3 md:py-1.5 bg-red-100 text-red-600 text-3xs md:text-xs font-medium rounded-lg hover:bg-red-200 transition">
                                         Hapus
                                     </button>
                                 </form>
@@ -146,7 +189,9 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="px-6 py-10 text-center text-gray-400">Belum ada data karyawan.</td>
+                        <td colspan="7" class="px-3 md:px-6 py-8 md:py-10 text-center text-gray-400 text-2xs md:text-sm">
+                            Belum
+                            ada data karyawan.</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -158,7 +203,7 @@
     <div id="modal-tambah" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
         <div class="bg-white rounded-2xl w-full max-w-lg mx-4 p-6 shadow-xl">
             <div class="flex items-center justify-between mb-5">
-                <h3 class="font-semibold text-gray-800">Tambah karyawan baru</h3>
+                <h3 class="text-base font-semibold text-gray-800">Tambah karyawan baru</h3>
                 <button onclick="document.getElementById('modal-tambah').classList.add('hidden')"
                     class="text-gray-400 hover:text-gray-600">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
