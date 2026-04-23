@@ -201,7 +201,7 @@
 
     {{-- Modal Tambah Karyawan --}}
     <div id="modal-tambah" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-        <div class="bg-white rounded-2xl w-full max-w-lg mx-4 p-6 shadow-xl">
+        <div class="bg-white rounded-2xl w-full max-w-lg mx-4 p-6 shadow-xl overflow-y-scroll max-h-screen">
             <div class="flex items-center justify-between mb-5">
                 <h3 class="text-base font-semibold text-gray-800">Tambah karyawan baru</h3>
                 <button onclick="document.getElementById('modal-tambah').classList.add('hidden')"
@@ -211,9 +211,10 @@
                     </svg>
                 </button>
             </div>
-            <form method="POST" action="{{ route('admin.karyawan.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.karyawan.store') }}" enctype="multipart/form-data"
+                class="overflow-y-scroll">
                 @csrf
-                <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="flex flex-col md:grid md:grid-cols-2 gap-4 mb-4">
                     <div>
                         <label class="text-xs text-gray-400 mb-1 block">Nama lengkap</label>
                         <input type="text" name="name" required placeholder="Nama lengkap"

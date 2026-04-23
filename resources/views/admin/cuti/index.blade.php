@@ -41,7 +41,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        Penggajian
+        Kelola Gaji Karyawan
     </a>
 @endsection
 
@@ -67,7 +67,8 @@
                             <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">Alasan cuti</th>
                             <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium hidden lg:table-cell">Tanggal izin</th>
                             <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Tanggal mulai</th>
-                            <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium hidden sm:table-cell">Tanggal akhir</th>
+                            <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium hidden sm:table-cell">Tanggal akhir
+                            </th>
                             <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Aksi</th>
                         </tr>
                     </thead>
@@ -85,13 +86,20 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden sm:table-cell">{{ $cuti->user->posisi ?? '-' }}</td>
-                                    <td class="px-3 md:px-6 py-2 md:py-4 text-gray-600 max-w-xs text-2xs md:text-sm hidden md:table-cell">
+                                    <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden sm:table-cell">
+                                        {{ $cuti->user->posisi ?? '-' }}</td>
+                                    <td
+                                        class="px-3 md:px-6 py-2 md:py-4 text-gray-600 max-w-xs text-2xs md:text-sm hidden md:table-cell">
                                         <p class="truncate">{{ $cuti->alasan }}</p>
                                     </td>
-                                    <td class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm hidden lg:table-cell">{{ $cuti->tanggal_pengajuan->format('d/m/Y') }}</td>
-                                    <td class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm">{{ $cuti->dari->format('d/m/Y') }}</td>
-                                    <td class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm hidden sm:table-cell">{{ $cuti->sampai->format('d/m/Y') }}</td>
+                                    <td
+                                        class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm hidden lg:table-cell">
+                                        {{ $cuti->tanggal_pengajuan->format('d/m/Y') }}</td>
+                                    <td class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm">
+                                        {{ $cuti->dari->format('d/m/Y') }}</td>
+                                    <td
+                                        class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm hidden sm:table-cell">
+                                        {{ $cuti->sampai->format('d/m/Y') }}</td>
                                     <td class="px-3 md:px-6 py-2 md:py-4">
                                         <div class="flex items-center justify-center gap-1 md:gap-2">
                                             <form method="POST" action="{{ route('admin.cuti.approve', $cuti) }}">
@@ -139,43 +147,52 @@
                         <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">Alasan cuti</th>
                         <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium hidden lg:table-cell">Tanggal izin</th>
                         <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Tanggal mulai</th>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium hidden sm:table-cell">Tanggal akhir</th>
+                        <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium hidden sm:table-cell">Tanggal akhir
+                        </th>
                         <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Status</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
                     @forelse($cutis as $cuti)
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-3 md:px-6 py-2 md:py-4 whitespace-nowrap">
-                                <div class="flex items-center gap-2 md:gap-3">
-                                    <img src="https://ui-avatars.com/api/?name={{ $cuti->user->name }}&background=6366f1&color=fff"
-                                        class="w-8 h-8 md:w-9 md:h-9 rounded-full flex-shrink-0 object-cover">
-                                    <div>
-                                        <p class="font-medium text-gray-800 text-2xs md:text-sm">{{ $cuti->user->name }}</p>
-                                        <p class="text-3xs md:text-xs text-gray-400">{{ $cuti->user->nip ?? '-' }}</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden sm:table-cell">{{ $cuti->user->posisi ?? '-' }}</td>
-                            <td class="px-3 md:px-6 py-2 md:py-4 text-gray-600 max-w-xs text-2xs md:text-sm hidden md:table-cell">
-                                <p class="truncate">{{ $cuti->alasan }}</p>
-                            </td>
-                            <td class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm hidden lg:table-cell">{{ $cuti->tanggal_pengajuan->format('d/m/Y') }}</td>
-                            <td class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm">{{ $cuti->dari->format('d/m/Y') }}</td>
-                            <td class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm hidden sm:table-cell">{{ $cuti->sampai->format('d/m/Y') }}</td>
-                            <td class="px-3 md:px-6 py-2 md:py-4 text-center">
-                                @php
-                                    $badge = match ($cuti->status) {
-                                        'disetujui' => ['bg-green-100 text-green-700 border border-green-200', 'Disetujui'],
-                                        'ditolak' => ['bg-red-100 text-red-600 border border-red-200', 'Ditolak'],
-                                        default => ['bg-yellow-100 text-yellow-700 border border-yellow-200', 'Pending'],
-                                    };
-                                @endphp
-                                <span class="px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-3xs md:text-xs font-medium {{ $badge[0] }}">
-                                    {{ $badge[1] }}
-                                </span>
-                            </td>
-                        </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-3 md:px-6 py-2 md:py-4 whitespace-nowrap">
+                                            <div class="flex items-center gap-2 md:gap-3">
+                                                <img src="https://ui-avatars.com/api/?name={{ $cuti->user->name }}&background=6366f1&color=fff"
+                                                    class="w-8 h-8 md:w-9 md:h-9 rounded-full flex-shrink-0 object-cover">
+                                                <div>
+                                                    <p class="font-medium text-gray-800 text-2xs md:text-sm">{{ $cuti->user->name }}</p>
+                                                    <p class="text-3xs md:text-xs text-gray-400">{{ $cuti->user->nip ?? '-' }}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden sm:table-cell">
+                                            {{ $cuti->user->posisi ?? '-' }}</td>
+                                        <td
+                                            class="px-3 md:px-6 py-2 md:py-4 text-gray-600 max-w-xs text-2xs md:text-sm hidden md:table-cell">
+                                            <p class="truncate">{{ $cuti->alasan }}</p>
+                                        </td>
+                                        <td
+                                            class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm hidden lg:table-cell">
+                                            {{ $cuti->tanggal_pengajuan->format('d/m/Y') }}</td>
+                                        <td class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm">
+                                            {{ $cuti->dari->format('d/m/Y') }}</td>
+                                        <td
+                                            class="px-3 md:px-6 py-2 md:py-4 text-center text-gray-500 text-2xs md:text-sm hidden sm:table-cell">
+                                            {{ $cuti->sampai->format('d/m/Y') }}</td>
+                                        <td class="px-3 md:px-6 py-2 md:py-4 text-center">
+                                            @php
+                                                $badge = match ($cuti->status) {
+                                                    'disetujui' => ['bg-green-100 text-green-700 border border-green-200', 'Disetujui'],
+                                                    'ditolak' => ['bg-red-100 text-red-600 border border-red-200', 'Ditolak'],
+                                                    default => ['bg-yellow-100 text-yellow-700 border border-yellow-200', 'Pending'],
+                                                };
+                                            @endphp
+                         <span
+                                                class="px-1.5 py-0.5 md:px-3 md:py-1 rounded-full text-3xs md:text-xs font-medium {{ $badge[0] }}">
+                                                {{ $badge[1] }}
+                                            </span>
+                                        </td>
+                                    </tr>
                     @empty
                         <tr>
                             <td colspan="7" class="px-6 py-10 text-center text-gray-400">Belum ada data pengajuan cuti.</td>

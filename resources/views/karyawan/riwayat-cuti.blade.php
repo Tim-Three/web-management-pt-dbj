@@ -30,27 +30,33 @@
 @endsection
 @section('content')
     <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-100">
-            <h2 class="font-semibold text-gray-800">Riwayat Cuti</h2>
+        <div class="px-4 md:px-6 py-3 md:py-4 border-b border-gray-100">
+            <h2 class="font-semibold text-gray-800 text-sm md:text-base">Riwayat Cuti</h2>
         </div>
-        <table class="w-full text-sm">
-            <thead class="bg-gray-50 text-gray-500 text-xs">
+        <table class="w-full text-3xs md:text-sm min-w-full">
+            <thead class="bg-gray-50 text-gray-400 text-2xs md:text-xs">
                 <tr>
-                    <th class="px-6 py-3 text-left">Tanggal Pengajuan</th>
-                    <th class="px-6 py-3 text-center">Dari</th>
-                    <th class="px-6 py-3 text-center">Sampai</th>
-                    <th class="px-6 py-3 text-left">Alasan</th>
-                    <th class="px-6 py-3 text-center">Status</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Tanggal Pengajuan</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden sm:table-cell">Dari</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">Sampai</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden lg:table-cell">Alasan</th>
+                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Status</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-50">
                 @forelse($riwayat as $cuti)
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-3 text-gray-700">{{ $cuti->tanggal_pengajuan->format('d M Y') }}</td>
-                        <td class="px-6 py-3 text-center text-gray-600">{{ $cuti->dari->format('d/m/Y') }}</td>
-                        <td class="px-6 py-3 text-center text-gray-600">{{ $cuti->sampai->format('d/m/Y') }}</td>
-                        <td class="px-6 py-3 text-gray-500 max-w-xs truncate">{{ $cuti->alasan }}</td>
-                        <td class="px-6 py-3 text-center">
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-3 md:px-6 py-2 md:py-3 text-gray-700">
+                            <span class="hidden md:block">{{ $cuti->tanggal_pengajuan->format('d M Y') }}</span>
+                            <span class="md:hidden">{{ $cuti->tanggal_pengajuan->format('d/m/y') }}</span>
+                        </td>
+                        <td class="px-3 md:px-6 py-2 md:py-3 text-gray-600 hidden sm:table-cell">
+                            {{ $cuti->dari->format('d/m/y') }}</td>
+                        <td class="px-3 md:px-6 py-2 md:py-3 text-gray-600 hidden md:table-cell">
+                            {{ $cuti->sampai->format('d/m/y') }}</td>
+                        <td class="px-3 md:px-6 py-2 md:py-3 text-gray-500 max-w-xs truncate hidden lg:table-cell">
+                            {{ $cuti->alasan }}</td>
+                        <td class="px-3 md:px-6 py-2 md:py-3">
                             @php
                                 $statusColor = match ($cuti->status) {
                                     'disetujui' => 'bg-green-100 text-green-700',
@@ -64,16 +70,17 @@
                                 };
                             @endphp
                             <span
-                                class="px-2.5 py-1 rounded-full text-xs font-medium {{ $statusColor }}">{{ $statusLabel }}</span>
+                                class="px-1 md:px-2.5 py-0.5 md:py-1 rounded-full text-3xs md:text-xs font-medium {{ $statusColor }}">{{ $statusLabel }}</span>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="px-6 py-8 text-center text-gray-400">Belum ada riwayat cuti.</td>
+                        <td colspan="5" class="px-3 md:px-6 py-4 md:py-8 text-center text-gray-400 text-xs md:text-sm">Belum ada
+                            riwayat cuti.</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
-        <div class="px-6 py-4">{{ $riwayat->links() }}</div>
+        <div class="px-4 md:px-6 py-3 md:py-4 border-t border-gray-100">{{ $riwayat->links() }}</div>
     </div>
 @endsection

@@ -164,42 +164,6 @@
                 </div>
             </div>
 
-            {{-- Modal Konfirmasi Logout --}}
-            <div id="modal-logout" class="hidden fixed inset-0 z-50 flex items-center justify-center">
-                {{-- Backdrop --}}
-                <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"
-                    onclick="document.getElementById('modal-logout').classList.add('hidden')"></div>
-
-                {{-- Modal Box --}}
-                <div class="relative bg-white rounded-2xl shadow-xl p-6 w-80 flex flex-col items-center gap-4">
-                    {{-- Icon --}}
-                    <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center">
-                        <svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                        </svg>
-                    </div>
-
-                    {{-- Text --}}
-                    <div class="text-center">
-                        <h3 class="text-gray-800 font-semibold text-base">Yakin ingin keluar?</h3>
-                        <p class="text-gray-400 text-sm mt-1">Sesi kamu akan diakhiri dan kamu perlu login kembali.</p>
-                    </div>
-
-                    {{-- Buttons --}}
-                    <div class="flex gap-3 w-full">
-                        <button onclick="document.getElementById('modal-logout').classList.add('hidden')"
-                            class="flex-1 px-4 py-2 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50">
-                            Batal
-                        </button>
-                        <button onclick="document.getElementById('form-logout').submit()"
-                            class="flex-1 px-4 py-2 rounded-xl bg-red-500 text-white text-sm hover:bg-red-600">
-                            Ya, Keluar
-                        </button>
-
-                    </div>
-                </div>
-            </div>
         </aside>
 
         {{-- Main Content --}}
@@ -240,6 +204,43 @@
 
                 @yield('content')
             </main>
+        </div>
+    </div>
+
+    {{-- Modal Konfirmasi Logout (Global) --}}
+    <div id="modal-logout" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+        {{-- Backdrop --}}
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            onclick="document.getElementById('modal-logout').classList.add('hidden')"></div>
+
+        {{-- Modal Box --}}
+        <div class="relative bg-white rounded-2xl shadow-xl p-6 w-80 flex flex-col items-center gap-4">
+            {{-- Icon --}}
+            <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center">
+                <svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+            </div>
+
+            {{-- Text --}}
+            <div class="text-center">
+                <h3 class="text-gray-800 font-semibold text-base">Yakin ingin keluar?</h3>
+                <p class="text-gray-400 text-sm mt-1">Sesi kamu akan diakhiri dan kamu perlu login kembali.</p>
+            </div>
+
+            {{-- Buttons --}}
+            <div class="flex gap-3 w-full">
+                <button onclick="document.getElementById('modal-logout').classList.add('hidden')"
+                    class="flex-1 px-4 py-2 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50">
+                    Batal
+                </button>
+                <button onclick="document.getElementById('form-logout').submit()"
+                    class="flex-1 px-4 py-2 rounded-xl bg-red-500 text-white text-sm hover:bg-red-600">
+                    Ya, Keluar
+                </button>
+
+            </div>
         </div>
     </div>
 </body>
