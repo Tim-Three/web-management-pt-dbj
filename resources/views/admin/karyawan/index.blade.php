@@ -47,69 +47,66 @@
 
 @section('content')
 
-    {{-- Summary Cards --}}
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div class="bg-green-600 rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between">
-            <div>
-                <p class="text-green-200 text-2xs md:text-xs mb-2 md:mb-3">Total karyawan</p>
-                <p class="text-2xl md:text-5xl font-bold text-white">{{ $totalKaryawan }}</p>
-            </div>
-            <div class="min-w-8 h-8 md:w-9 md:h-9 bg-white rounded-xl flex items-center justify-center">
-                <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-            </div>
-        </div>
-        <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
-            <p class="text-xs text-gray-400 mb-2">Hadir hari ini</p>
-            <p class="text-3xl font-bold text-gray-800">{{ $hadir }}</p>
-        </div>
-        <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
-            <p class="text-xs text-gray-400 mb-2">Telat hari ini</p>
-            <p class="text-3xl font-bold text-gray-800">{{ $telat }}</p>
-        </div>
-        <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
-            <p class="text-xs text-gray-400 mb-2">Izin/Cuti hari ini</p>
-            <p class="text-3xl font-bold text-gray-800">{{ $izin }}</p>
-        </div>
-        {{-- Hadir, Telat, Izin Hari Ini Tampilan HP --}}
-        <div class="bg-white rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between md:hidden">
-            <div class="flex-1">
-                <p class="text-2xs md:text-xs text-gray-400 mb-2 md:mb-4">Detail kehadiran <br> hari ini</p>
-                <div class="flex justify-start gap-2 md:gap-10">
-                    <div>
-                        <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $hadir }}</p>
-                        <p class="text-3xs md:text-xs text-gray-400 mt-1">Hadir</p>
-                    </div>
-                    <div>
-                        <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $telat }}</p>
-                        <p class="text-3xs md:text-xs text-gray-400 mt-1">Telat</p>
-                    </div>
-                    <div>
-                        <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $izin }}</p>
-                        <p class="text-3xs md:text-xs text-gray-400 mt-1">Izin</p>
-                    </div>
+    {{-- Row 1: Stats + Kehadiran Terkini --}}
+    <div class="flex flex-col gap-4 mb-4 md:grid" style="grid-template-columns: 300px 1fr;">
+
+        {{-- Kiri: Total Karyawan + Detail Kehadiran (side by side on mobile, stacked on desktop) --}}
+        <div class="flex gap-4 flex-row md:flex-col">
+
+            {{-- Total Karyawan Card (hijau) --}}
+            <div class="bg-green-600 rounded-2xl p-4 md:p-5 flex items-start justify-between min-h-28 w-1/2 md:w-full">
+                <div>
+                    <p class="text-green-200 text-xs md:text-sm mb-2 md:mb-3">Total karyawan</p>
+                    <p class="text-5xl md:text-5xl font-bold text-white">{{ $totalKaryawan }}</p>
+                </div>
+                <div class="min-w-8 h-8 md:w-9 md:h-9 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
                 </div>
             </div>
-            <div class="min-w-8 h-8 md:w-9 md:h-9 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
+
+            {{-- Detail Kehadiran Hari Ini --}}
+            <div
+                class="bg-white rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between min-h-28 w-1/2 md:w-full">
+                <div class="flex-1">
+                    <p class="text-2xs md:text-xs text-gray-400 mb-2 md:mb-4">Detail kehadiran <br> hari ini</p>
+                    <div class="flex justify-start gap-2 md:gap-10">
+                        <div>
+                            <p class="text-3xl font-bold text-gray-800">{{ $hadir }}</p>
+                            <p class="text-xs text-gray-400 mt-1">Hadir</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gray-800">{{ $telat }}</p>
+                            <p class="text-xs text-gray-400 mt-1">Telat</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gray-800">{{ $izin }}</p>
+                            <p class="text-xs text-gray-400 mt-1">Izin</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="min-w-8 h-8 md:w-9 md:h-9 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                </div>
             </div>
         </div>
     </div>
 
     {{-- Tabel Karyawan --}}
     <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+        <div class="px-4 md:px-6 py-4 border-b border-gray-100 flex items-center justify-between">
             <div>
                 <h2 class="text-sm md:text-base font-semibold text-gray-800">Daftar karyawan</h2>
                 <p class="text-2xs md:text-xs text-gray-400 mt-0.5">{{ $karyawan->total() }} karyawan terdaftar</p>
             </div>
             <button onclick="document.getElementById('modal-tambah').classList.remove('hidden')"
-                class="flex items-center gap-2 px-4 py-2 bg-green-600 text-white text-xs md:text-sm font-semibold rounded-xl hover:bg-green-700 transition">
+                class="flex items-center gap-1 md:gap-2 px-2 md:px-4 py-2 bg-green-600 text-white text-xs md:text-sm font-semibold rounded-xl hover:bg-green-700 transition">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
@@ -117,16 +114,17 @@
             </button>
         </div>
 
-        <table class="w-full text-3xs md:text-sm min-w-full">
-            <thead class="bg-gray-50 text-gray-400 text-2xs md:text-xs">
+        <div class="overflow-x-auto">
+            <table class="w-full text-3xs md:text-sm min-w-full sm:min-w-[800px] table-fixed sm:table-auto">
+                <thead class="bg-gray-50 text-gray-400 text-2xs md:text-xs">
                 <tr>
-                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Nama</th>
-                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden sm:table-cell">Posisi</th>
-                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">Email</th>
-                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden lg:table-cell">No. Telp</th>
-                    <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden xl:table-cell">Domisili</th>
-                    <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Status</th>
-                    <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Aksi</th>
+                    <th class="w-1/2 sm:w-auto px-3 md:px-6 py-2 md:py-3 text-left font-medium">Nama</th>
+                <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden sm:table-cell">Posisi</th>
+                <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">Email</th>
+                <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden lg:table-cell">No. Telp</th>
+                <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden xl:table-cell">Domisili</th>
+                <th class="w-1/4 sm:w-auto px-3 md:px-6 py-2 md:py-3 text-center font-medium">Status</th>
+                <th class="w-1/4 sm:w-auto px-3 md:px-6 py-2 md:py-3 text-center font-medium">Aksi</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-50">
@@ -196,6 +194,7 @@
                 @endforelse
             </tbody>
         </table>
+        </div>
         <div class="px-6 py-4">{{ $karyawan->links() }}</div>
     </div>
 
