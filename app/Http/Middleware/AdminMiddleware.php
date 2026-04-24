@@ -15,9 +15,16 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() || auth()->user()->role !== 'admin') {
-            abort(403, 'Akses ditolak.');
+        if (!auth()->check()) {
+            return redirect()->route('login');
         }
+
+        if (auth()->user()->role !== 'admin') {
+            // Balikin ke dashboard user dengan pesan flash
+            return redirect()->route('karyawan.beranda')
+                ->with('error', 'Halaman sebelumnya itu khusus Admin.');
+        }
+
         return $next($request);
     }
 }

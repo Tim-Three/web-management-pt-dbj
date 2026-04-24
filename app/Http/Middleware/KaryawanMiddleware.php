@@ -16,8 +16,15 @@ class KaryawanMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!auth()->check()) {
-            return redirect('/login');
+            return redirect()->route('login');
         }
+
+        if (auth()->user()->role !== 'karyawan') {
+            // Admin mencoba akses page user? Balikin ke admin dashboard
+            return redirect()->route('admin.beranda')
+                ->with('error', 'Halaman sebelumnya itu khusus untuk Karyawan.');
+        }
+
         return $next($request);
     }
 }
