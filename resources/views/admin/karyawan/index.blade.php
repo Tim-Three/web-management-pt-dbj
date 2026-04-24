@@ -47,54 +47,62 @@
 
 @section('content')
 
-    {{-- Row 1: Stats + Kehadiran Terkini --}}
-    <div class="flex flex-col gap-4 mb-4 md:grid" style="grid-template-columns: 300px 1fr;">
-
-        {{-- Kiri: Total Karyawan + Detail Kehadiran (side by side on mobile, stacked on desktop) --}}
-        <div class="flex gap-4 flex-row md:flex-col">
-
-            {{-- Total Karyawan Card (hijau) --}}
-            <div class="bg-green-600 rounded-2xl p-4 md:p-5 flex items-start justify-between min-h-28 w-1/2 md:w-full">
+    {{-- Summary Cards (Format yang konsisten dengan Row 1) --}}
+    <div class="flex flex-col gap-4 mb-6 md:grid md:grid-cols-4">
+    
+        {{-- Container buat Mobile (Flex Row) / Buat Desktop (Langsung Grid) --}}
+        {{-- Di HP dia bakal bagi dua kolom (50-50), di Desktop dia bakal jadi bagian dari grid 4 kolom --}}
+        <div class="flex flex-row md:contents gap-4">
+    
+            {{-- 1. Total Karyawan Card (Hijau) --}}
+            <div class="bg-green-600 rounded-2xl p-4 md:p-5 flex items-start justify-between min-h-[112px] w-1/2 md:w-full">
                 <div>
-                    <p class="text-green-200 text-xs md:text-sm mb-2 md:mb-3">Total karyawan</p>
-                    <p class="text-5xl md:text-5xl font-bold text-white">{{ $totalKaryawan }}</p>
+                    <p class="text-green-200 text-2xs md:text-xs mb-2 md:mb-3">Total karyawan</p>
+                    <p class="text-3xl md:text-5xl font-bold text-white">{{ $totalKaryawan }}</p>
                 </div>
                 <div class="min-w-8 h-8 md:w-9 md:h-9 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
                     <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                 </div>
             </div>
-
-            {{-- Detail Kehadiran Hari Ini --}}
-            <div
-                class="bg-white rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between min-h-28 w-1/2 md:w-full">
+    
+            {{-- 2. Detail Kehadiran Card (Gabungan Hadir, Telat, Izin di HP) --}}
+            {{-- Di HP ini jadi satu kotak gede sebelah kanan --}}
+            <div class="bg-white rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between min-h-[112px] w-1/2 md:hidden">
                 <div class="flex-1">
-                    <p class="text-2xs md:text-xs text-gray-400 mb-2 md:mb-4">Detail kehadiran <br> hari ini</p>
-                    <div class="flex justify-start gap-2 md:gap-10">
+                    <p class="text-2xs text-gray-400 mb-2">Detail kehadiran <br> hari ini</p>
+                    <div class="flex justify-start gap-3">
                         <div>
-                            <p class="text-3xl font-bold text-gray-800">{{ $hadir }}</p>
-                            <p class="text-xs text-gray-400 mt-1">Hadir</p>
+                            <p class="text-xl font-bold text-gray-800">{{ $hadir }}</p>
+                            <p class="text-[10px] text-gray-400">Hadir</p>
                         </div>
                         <div>
-                            <p class="text-3xl font-bold text-gray-800">{{ $telat }}</p>
-                            <p class="text-xs text-gray-400 mt-1">Telat</p>
+                            <p class="text-xl font-bold text-gray-800">{{ $telat }}</p>
+                            <p class="text-[10px] text-gray-400">Telat</p>
                         </div>
                         <div>
-                            <p class="text-3xl font-bold text-gray-800">{{ $izin }}</p>
-                            <p class="text-xs text-gray-400 mt-1">Izin</p>
+                            <p class="text-xl font-bold text-gray-800">{{ $izin }}</p>
+                            <p class="text-[10px] text-gray-400">Izin</p>
                         </div>
                     </div>
                 </div>
-                <div
-                    class="min-w-8 h-8 md:w-9 md:h-9 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
-                </div>
             </div>
+    
+            {{-- 3. Tampilan Desktop buat Hadir, Telat, Izin (Terpisah 3 kolom) --}}
+            <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
+                <p class="text-xs text-gray-400 mb-2">Hadir hari ini</p>
+                <p class="text-3xl font-bold text-gray-800">{{ $hadir }}</p>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
+                <p class="text-xs text-gray-400 mb-2">Telat hari ini</p>
+                <p class="text-3xl font-bold text-gray-800">{{ $telat }}</p>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
+                <p class="text-xs text-gray-400 mb-2">Izin/Cuti hari ini</p>
+                <p class="text-3xl font-bold text-gray-800">{{ $izin }}</p>
+            </div>
+    
         </div>
     </div>
 
@@ -121,7 +129,7 @@
                     <th class="w-1/2 sm:w-auto px-3 md:px-6 py-2 md:py-3 text-left font-medium">Nama</th>
                 <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden sm:table-cell">Posisi</th>
                 <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">Email</th>
-                <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden lg:table-cell">No. Telp</th>
+                <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">No. Telp</th>
                 <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden xl:table-cell">Domisili</th>
                 <th class="w-1/4 sm:w-auto px-3 md:px-6 py-2 md:py-3 text-center font-medium">Status</th>
                 <th class="w-1/4 sm:w-auto px-3 md:px-6 py-2 md:py-3 text-center font-medium">Aksi</th>
@@ -155,7 +163,7 @@
                         <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden md:table-cell">
                             {{ $k->email }}
                         </td>
-                        <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden lg:table-cell">
+                        <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden md:table-cell">
                             {{ $k->no_telp ?? '-' }}
                         </td>
                         <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden xl:table-cell">

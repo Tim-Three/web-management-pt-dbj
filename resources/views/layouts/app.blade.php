@@ -48,7 +48,7 @@
     <div x-data="{ open: false }" class="flex h-screen overflow-hidden">
         {{-- Mobile Sidebar --}}
         <aside :class="open ? 'translate-x-0' : '-translate-x-full'"
-            class="fixed z-30 inset-y-0 left-0 w-72 bg-white border-r border-gray-100 flex flex-col flex-shrink-0 transform transition-transform duration-300 md:translate-x-0 md:static md:inset-0 md:hidden">
+            class="fixed z-30 inset-y-0 left-0 w-72 bg-white border-r border-gray-100 flex flex-col flex-shrink-0 transform transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-0 lg:hidden">
             {{-- Logo --}}
             <div class="px-6 py-5 border-b border-gray-100">
                 <div class="flex items-center gap-3">
@@ -104,12 +104,12 @@
         </aside>
 
         <!-- Overlay (mobile only) -->
-        <div x-show="open" @click="open = false" class="fixed inset-0 bg-black opacity-50 z-20 md:hidden">
+        <div x-show="open" @click="open = false" class="fixed inset-0 bg-black opacity-50 z-20 lg:hidden">
         </div>
 
 
         {{-- Sidebar --}}
-        <aside class="w-72 bg-white border-r border-gray-100 flex-col flex-shrink-0 hidden md:flex">
+        <aside class="w-72 bg-white border-r border-gray-100 flex-col flex-shrink-0 hidden lg:flex">
 
             {{-- Logo --}}
             <div class="px-6 py-5 border-b border-gray-100">
@@ -170,13 +170,13 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             {{-- Topbar --}}
             <header class="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between flex-shrink-0">
-                <button @click="open = true" class="md:hidden text-3xl">
+                <button @click="open = true" class="lg:hidden text-3xl">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                         d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
-                <div class="md:block hidden">
+                <div class="lg:block hidden">
                     <h1 class="text-base font-semibold text-gray-800">@yield('page-title')</h1>
                     <p class="text-sm text-gray-400">
                         @yield('page-subtitle', 'Selamat datang di sistem manajemen PT DBJ.')</p>

@@ -195,6 +195,11 @@
                                 </td>
                             </tr>
                         @empty
+                        <tr>
+                            <td colspan="7" class="px-3 md:px-6 py-8 md:py-10 text-center text-gray-400 text-2xs md:text-sm">
+                                Belum
+                                ada data penggajian.</td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>
