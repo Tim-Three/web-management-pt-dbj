@@ -39,3 +39,7 @@ Route::get('/dashboard', function () {
     }
     return redirect()->route('karyawan.beranda');
 })->middleware('auth');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/bantuan', fn() => view('bantuan'))->name('bantuan');
+});
