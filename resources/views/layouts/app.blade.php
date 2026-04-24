@@ -171,7 +171,10 @@
             {{-- Topbar --}}
             <header class="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between flex-shrink-0">
                 <button @click="open = true" class="md:hidden text-3xl">
-                    ☰
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
                 </button>
                 <div class="md:block hidden">
                     <h1 class="text-base font-semibold text-gray-800">@yield('page-title')</h1>
