@@ -79,4 +79,6 @@ class AbsensiController extends Controller
 
         return view('karyawan.riwayat-absen', compact('riwayat'));
     }
+
+    
 }

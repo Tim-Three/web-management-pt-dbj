@@ -19,6 +19,15 @@
         </svg>
         Data Karyawan
     </a>
+    <a href="{{ route('admin.absensi.index') }}"
+        class="flex items-center gap-3 px-2 py-2 rounded-lg text-sm mb-1 transition
+        {{ request()->routeIs('admin.absensi.*') ? 'bg-green-50 text-green-700 font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700' }}">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+        </svg>
+        Rekap Absensi
+    </a>
     <a href="{{ route('admin.cuti.index') }}"
         class="flex items-center gap-3 px-2 py-2 rounded-lg text-gray-600 hover:bg-gray-50 text-sm mb-1">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,7 +63,8 @@
         <div class="bg-gray-500 md:bg-white rounded-2xl p-5 border border-gray-100 flex items-start justify-between">
             <div>
                 <p class="text-2xs md:text-xs text-white md:text-gray-400 mb-3">Total gaji yang sudah dibayar</p>
-                <p class="text-lg md:text-xl font-bold text-white md:text-green-600">Rp{{ number_format($totalSudahDibayar, 0, ',', '.') }}</p>
+                <p class="text-lg md:text-xl font-bold text-white md:text-green-600">
+                    Rp{{ number_format($totalSudahDibayar, 0, ',', '.') }}</p>
             </div>
             <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,7 +78,8 @@
         <div class="bg-red-500 md:bg-white rounded-2xl p-5 border border-gray-100 flex items-start justify-between">
             <div>
                 <p class="text-2xs md:text-xs text-white md:text-gray-400 mb-3">Total gaji yang belum dibayar</p>
-                <p class="text-lg md:text-xl font-bold text-white md:text-red-500">{{ number_format($totalBelumDibayar, 0, ',', '.') }}</p>
+                <p class="text-lg md:text-xl font-bold text-white md:text-red-500">
+                    {{ number_format($totalBelumDibayar, 0, ',', '.') }}</p>
             </div>
             <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,8 +147,10 @@
                         <tr>
                             <th class="px-3 md:px-5 py-2 md:py-3 text-left font-medium">Nama</th>
                             <th class="px-3 md:px-5 py-2 md:py-3 text-left font-medium hidden sm:table-cell">Posisi</th>
-                            <th class="px-3 md:px-5 py-2 md:py-3 text-right font-medium hidden md:table-cell">Gaji pokok</th>
-                            <th class="px-3 md:px-5 py-2 md:py-3 text-right font-medium hidden md:table-cell">Tunjangan</th>
+                            <th class="px-3 md:px-5 py-2 md:py-3 text-right font-medium hidden md:table-cell">Gaji pokok
+                            </th>
+                            <th class="px-3 md:px-5 py-2 md:py-3 text-right font-medium hidden md:table-cell">Tunjangan
+                            </th>
                             <th class="px-3 md:px-5 py-2 md:py-3 text-right font-medium hidden lg:table-cell">Potongan</th>
                             <th class="px-3 md:px-5 py-2 md:py-3 text-right font-medium">Total</th>
                             <th class="px-3 md:px-5 py-2 md:py-3 text-center font-medium">Status</th>
@@ -152,31 +165,42 @@
                                         <img src="{{ $gaji->user->foto ? Storage::url($gaji->user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($gaji->user->name) . '&background=6366f1&color=fff' }}"
                                             class="w-8 h-8 md:w-9 md:h-9 rounded-full flex-shrink-0 object-cover">
                                         <div>
-                                            <p class="font-semibold text-gray-800 text-2xs md:text-sm">{{ $gaji->user->name }}</p>
-                                            <p class="text-3xs md:text-[11px] text-gray-400">{{ $gaji->user->nip ?? '-' }}</p>
+                                            <p class="font-semibold text-gray-800 text-2xs md:text-sm">
+                                                {{ $gaji->user->name }}</p>
+                                            <p class="text-3xs md:text-[11px] text-gray-400">{{ $gaji->user->nip ?? '-' }}
+                                            </p>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-3 md:px-5 py-2 md:py-4 text-gray-500 whitespace-nowrap text-2xs md:text-xs hidden sm:table-cell">
+                                <td
+                                    class="px-3 md:px-5 py-2 md:py-4 text-gray-500 whitespace-nowrap text-2xs md:text-xs hidden sm:table-cell">
                                     {{ $gaji->user->posisi ?? '-' }}
                                 </td>
-                                <td class="px-3 md:px-5 py-2 md:py-4 text-right text-gray-600 whitespace-nowrap text-2xs md:text-xs hidden md:table-cell">
+                                <td
+                                    class="px-3 md:px-5 py-2 md:py-4 text-right text-gray-600 whitespace-nowrap text-2xs md:text-xs hidden md:table-cell">
                                     Rp{{ number_format($gaji->gaji_pokok, 0, ',', '.') }}
                                 </td>
-                                <td class="px-3 md:px-5 py-2 md:py-4 text-right text-green-600 whitespace-nowrap text-2xs md:text-xs font-medium hidden md:table-cell">
+                                <td
+                                    class="px-3 md:px-5 py-2 md:py-4 text-right text-green-600 whitespace-nowrap text-2xs md:text-xs font-medium hidden md:table-cell">
                                     + Rp{{ number_format($gaji->tunjangan, 0, ',', '.') }}
                                 </td>
-                                <td class="px-3 md:px-5 py-2 md:py-4 text-right text-red-500 whitespace-nowrap text-2xs md:text-xs font-medium hidden lg:table-cell">
+                                <td
+                                    class="px-3 md:px-5 py-2 md:py-4 text-right text-red-500 whitespace-nowrap text-2xs md:text-xs font-medium hidden lg:table-cell">
                                     - Rp{{ number_format($gaji->potongan, 0, ',', '.') }}
                                 </td>
-                                <td class="px-3 md:px-5 py-2 md:py-4 text-right font-bold text-gray-800 whitespace-nowrap text-2xs md:text-xs">
+                                <td
+                                    class="px-3 md:px-5 py-2 md:py-4 text-right font-bold text-gray-800 whitespace-nowrap text-2xs md:text-xs">
                                     Rp{{ number_format($gaji->total_gaji, 0, ',', '.') }}
                                 </td>
                                 <td class="px-3 md:px-5 py-2 md:py-4 text-center whitespace-nowrap">
                                     @if ($gaji->status === 'sudah_dibayar')
-                                        <span class="px-2 py-1 rounded-full text-3xs md:text-xs font-medium bg-green-100 text-green-700">Sudah dibayar</span>
+                                        <span
+                                            class="px-2 py-1 rounded-full text-3xs md:text-xs font-medium bg-green-100 text-green-700">Sudah
+                                            dibayar</span>
                                     @else
-                                        <span class="px-2 py-1 rounded-full text-3xs md:text-xs font-medium bg-yellow-100 text-yellow-700">Belum dibayar</span>
+                                        <span
+                                            class="px-2 py-1 rounded-full text-3xs md:text-xs font-medium bg-yellow-100 text-yellow-700">Belum
+                                            dibayar</span>
                                     @endif
                                 </td>
                                 <td class="px-3 md:px-5 py-2 md:py-4 text-center whitespace-nowrap">
@@ -195,11 +219,12 @@
                                 </td>
                             </tr>
                         @empty
-                        <tr>
-                            <td colspan="7" class="px-3 md:px-6 py-8 md:py-10 text-center text-gray-400 text-2xs md:text-sm">
-                                Belum
-                                ada data penggajian.</td>
-                        </tr>
+                            <tr>
+                                <td colspan="7"
+                                    class="px-3 md:px-6 py-8 md:py-10 text-center text-gray-400 text-2xs md:text-sm">
+                                    Belum
+                                    ada data penggajian.</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -237,7 +262,8 @@
                                 @endforeach
                             </select>
                             <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M19 9l-7 7-7-7" />
                                 </svg>
@@ -251,7 +277,8 @@
                             <input type="month" name="bulan" value="{{ $bulanIni }}" required
                                 class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500">
                             <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
@@ -261,7 +288,8 @@
 
                     <div>
                         <label class="text-xs text-gray-400 mb-1 block">Gaji pokok (Rp)</label>
-                        <input type="number" name="gaji_pokok" id="gaji_pokok" value="0" required oninput="hitungTotal()"
+                        <input type="number" name="gaji_pokok" id="gaji_pokok" value="0" required
+                            oninput="hitungTotal()"
                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500">
                     </div>
 

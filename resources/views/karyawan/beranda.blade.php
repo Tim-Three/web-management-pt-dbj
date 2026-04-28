@@ -19,6 +19,15 @@
         </svg>
         Riwayat Absen
     </a>
+    <a href="{{ route('karyawan.rekap.absensi') }}"
+        class="flex items-center gap-3 px-2 py-2 rounded-lg text-sm mb-1 transition
+        {{ request()->routeIs('karyawan.rekap.absensi') ? 'bg-green-50 text-green-700 font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700' }}">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        Rekap Absensi
+    </a>
     <a href="{{ route('karyawan.riwayat.cuti') }}"
         class="flex items-center gap-3 px-2 py-2 rounded-lg text-gray-600 hover:bg-gray-50 text-sm mb-1">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -182,28 +191,30 @@
             @endphp
             <form method="POST" action="{{ route('karyawan.absen.masuk') }}">
                 @csrf
-                <button type="submit" {{ $sudahAbsenMasuk || $sedangCuti ? 'disabled' : '' }} class="w-full py-4 rounded-xl font-semibold text-sm transition
+                <button type="submit" {{ $sudahAbsenMasuk || $sedangCuti ? 'disabled' : '' }}
+                    class="w-full py-4 rounded-xl font-semibold text-sm transition
                                                     {{ $sudahAbsenMasuk
-        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-        : ($sedangCuti
-            ? 'bg-blue-100 text-blue-400 cursor-not-allowed'
-            : 'bg-green-600 text-white hover:bg-green-700 active:scale-95') }}">
+                                                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                                        : ($sedangCuti
+                                                            ? 'bg-blue-100 text-blue-400 cursor-not-allowed'
+                                                            : 'bg-green-600 text-white hover:bg-green-700 active:scale-95') }}">
                     {{ $sedangCuti ? 'Sedang Cuti' : 'Absen Masuk' }}
                 </button>
             </form>
             <form method="POST" action="{{ route('karyawan.absen.pulang') }}">
                 @csrf
-                <button type="submit" {{ $sedangCuti || !$sudahAbsenMasuk || $sudahAbsenPulang ? 'disabled' : '' }} class="w-full py-4 rounded-xl font-semibold text-sm transition
+                <button type="submit" {{ $sedangCuti || !$sudahAbsenMasuk || $sudahAbsenPulang ? 'disabled' : '' }}
+                    class="w-full py-4 rounded-xl font-semibold text-sm transition
                                                     {{ $sedangCuti || !$sudahAbsenMasuk || $sudahAbsenPulang
-        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-        : 'bg-gray-700 text-white hover:bg-gray-800 active:scale-95' }}">
+                                                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                                        : 'bg-gray-700 text-white hover:bg-gray-800 active:scale-95' }}">
                     Absen Pulang
                 </button>
             </form>
         </div>
 
         {{-- Show check-in/out times on mobile if already checked in --}}
-        @if($absensiHariIni)
+        @if ($absensiHariIni)
             <div class="md:hidden mt-4 pt-4 border-t border-gray-50 grid grid-cols-2 gap-3 text-center">
                 <div>
                     <p class="text-xs text-gray-400 mb-1">Jam masuk</p>
@@ -274,7 +285,8 @@
         <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
             <div class="px-4 md:px-6 py-3 md:py-4 border-b border-gray-100 flex items-center justify-between">
                 <p class="font-semibold text-gray-800 text-sm md:text-base">Riwayat absensi</p>
-                <a href="{{ route('karyawan.riwayat.absen') }}" class="md:hidden text-xs text-green-600 font-medium">Lihat
+                <a href="{{ route('karyawan.riwayat.absen') }}"
+                    class="md:hidden text-xs text-green-600 font-medium">Lihat
                     semua →</a>
             </div>
             <table class="w-full text-3xs md:text-sm min-w-full">
