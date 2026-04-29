@@ -17,14 +17,15 @@ Route::middleware(['auth', 'karyawan'])->prefix('karyawan')->name('karyawan.')->
     Route::get('/riwayat-absen', [App\Http\Controllers\Karyawan\AbsensiController::class, 'riwayat'])->name('riwayat.absen');
     Route::get('/riwayat-cuti', [App\Http\Controllers\Karyawan\CutiController::class, 'riwayat'])->name('riwayat.cuti');
     Route::post('/cuti/ajukan', [App\Http\Controllers\Karyawan\CutiController::class, 'ajukan'])->name('cuti.ajukan');
-    Route::get('/rekap-absensi', [App\Http\Controllers\Karyawan\RekapAbsensiController::class, 'index'])->name('rekap.absensi'); // ← TAMBAH INI
+    Route::get('/rekap-absensi', [App\Http\Controllers\Karyawan\RekapAbsensiController::class, 'index'])->name('rekap.absensi');
+    Route::patch('/profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('profil.update');
 });
 
 // ─── ADMIN ROUTES ──────────────────────────────────
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/beranda', [App\Http\Controllers\Admin\BerandaController::class, 'index'])->name('beranda');
     Route::resource('karyawan', App\Http\Controllers\Admin\KaryawanController::class);
-    Route::get('/absensi', [App\Http\Controllers\Admin\AbsensiController::class, 'index'])->name('absensi.index'); // ← TAMBAH INI
+    Route::get('/absensi', [App\Http\Controllers\Admin\AbsensiController::class, 'index'])->name('absensi.index');
     Route::get('/cuti', [App\Http\Controllers\Admin\CutiController::class, 'index'])->name('cuti.index');
     Route::patch('/cuti/{cuti}/approve', [App\Http\Controllers\Admin\CutiController::class, 'approve'])->name('cuti.approve');
     Route::patch('/cuti/{cuti}/tolak', [App\Http\Controllers\Admin\CutiController::class, 'tolak'])->name('cuti.tolak');
@@ -33,6 +34,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/penggajian', [App\Http\Controllers\Admin\PenggajianController::class, 'index'])->name('penggajian.index');
     Route::post('/penggajian', [App\Http\Controllers\Admin\PenggajianController::class, 'store'])->name('penggajian.store');
     Route::patch('/penggajian/{penggajian}/bayar', [App\Http\Controllers\Admin\PenggajianController::class, 'bayar'])->name('penggajian.bayar');
+    Route::patch('/profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('profil.update');
 });
 
 // Redirect setelah login berdasarkan role

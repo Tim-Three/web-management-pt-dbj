@@ -71,7 +71,7 @@
         </div>
         <form method="GET" action="{{ route('admin.absensi.index') }}" class="w-full sm:w-auto">
             <input type="month" name="bulan" value="{{ $bulan }}" onchange="this.form.submit()"
-                class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 shadow-sm">
+                class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 ">
         </form>
     </div>
 
@@ -112,7 +112,7 @@
         @endphp
 
         @foreach ($cards as $card)
-            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-gray-100 flex items-start justify-between shadow-sm">
+            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-gray-100 flex items-start justify-between ">
                 <div class="min-w-0">
                     <p class="text-[10px] sm:text-xs text-gray-400 mb-1 truncate">{{ $card['label'] }}</p>
                     <p class="text-xl sm:text-3xl font-bold text-{{ $card['color'] }}-600 leading-tight">
@@ -134,7 +134,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {{-- Rekap Per Karyawan (Pindah ke Atas di Mobile) --}}
-        <div class="lg:col-span-1 bg-white rounded-2xl border border-gray-100 overflow-hidden h-fit shadow-sm">
+        <div class="lg:col-span-1 bg-white rounded-2xl border border-gray-100 overflow-hidden h-fit ">
             <div class="px-5 py-4 border-b border-gray-100 bg-gray-50/50">
                 <p class="font-semibold text-gray-800 text-sm">Rekap per karyawan</p>
                 <p class="text-[10px] text-gray-400 mt-0.5 italic">*Total akumulasi bulan ini</p>
@@ -163,7 +163,7 @@
         </div>
 
         {{-- Tabel Absensi Harian --}}
-        <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+        <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-100  overflow-hidden flex flex-col">
             <div class="px-5 py-4 border-b border-gray-100 flex justify-between items-center">
                 <div>
                     <p class="font-semibold text-gray-800 text-sm">Detail absensi harian</p>
