@@ -119,7 +119,7 @@
         @foreach ($cards as $card)
             <div class="bg-white rounded-2xl p-4 sm:p-5 border border-gray-100 flex items-start justify-between ">
                 <div class="min-w-0">
-                    <p class="text-[10px] sm:text-xs text-gray-400 mb-1 truncate">{{ $card['label'] }}</p>
+                    <p class="text-[10px] sm:text-xs text-gray-400 mb-1 font-bold uppercase">{{ $card['label'] }}</p>
                     <p class="text-xl sm:text-3xl font-bold text-{{ $card['color'] }}-600 leading-tight">
                         {{ $card['val'] }}</p>
                     <p class="text-[9px] sm:text-xs text-gray-300 mt-1 uppercase tracking-wider">{{ $card['desc'] }}</p>
@@ -140,9 +140,9 @@
 
         {{-- Rekap Per Karyawan (Pindah ke Atas di Mobile) --}}
         <div class="lg:col-span-1 bg-white rounded-2xl border border-gray-100 overflow-hidden h-fit ">
-            <div class="px-5 py-4 border-b border-gray-100 bg-gray-50/50">
-                <p class="font-semibold text-gray-800 text-sm">Rekap per karyawan</p>
-                <p class="text-[10px] text-gray-400 mt-0.5 italic">*Total akumulasi bulan ini</p>
+            <div class="px-5 py-4 border-b border-gray-100 bg-green-500">
+                <p class="font-semibold text-white text-sm">Rekap per karyawan</p>
+                <p class="text-[10px] text-gray-200 mt-0.5 italic">*Total akumulasi bulan ini</p>
             </div>
             <div class="divide-y divide-gray-50 max-h-[400px] lg:max-h-[600px] overflow-y-auto">
                 @foreach ($rekap as $r)

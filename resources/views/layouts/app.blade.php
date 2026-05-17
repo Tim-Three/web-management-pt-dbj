@@ -13,7 +13,7 @@
     <style>
         /* ── Dark mode variables ── */
         html.dark body { background-color: #0f172a; color: #e2e8f0; }
-        html.dark .bg-white { background-color: #1e293b !important; }
+        html.dark .bg-white { background-color: #1e293b; }
         html.dark .bg-gray-50 { background-color: #0f172a !important; }
         html.dark .border-gray-100 { border-color: #334155 !important; }
         html.dark .border-gray-200 { border-color: #334155 !important; }
@@ -21,11 +21,78 @@
         html.dark .text-gray-700 { color: #cbd5e1 !important; }
         html.dark .text-gray-600 { color: #94a3b8 !important; }
         html.dark .text-gray-500 { color: #64748b !important; }
-        html.dark .text-gray-400 { color: #475569 !important; }
+        html.dark .text-gray-400 { color: #94a3b8 !important; }
         html.dark .hover\:bg-gray-50:hover { background-color: #334155 !important; }
         html.dark .hover\:bg-gray-100:hover { background-color: #334155 !important; }
         html.dark .bg-gray-100 { background-color: #334155 !important; }
         html.dark .divide-gray-50 > * { border-color: #334155 !important; }
+
+        /* ── Card Summary Penggajian ── */
+        /* Mobile default: warna-warni */
+        .card-summary { background-color: #4b5563; } /* gray */
+        .card-summary[data-color="red"]   { background-color: #ef4444; }
+        .card-summary[data-color="green"] { background-color: #059669; }
+        .card-label       { color: #ffffff; }
+        .card-value-green { color: #ffffff; }
+        .card-value-red   { color: #ffffff; }
+        .card-icon        { background-color: rgba(255,255,255,0.2); color: #ffffff; }
+            
+        /* Desktop (md+): putih dengan teks berwarna */
+        @media (min-width: 768px) {
+            .card-summary,
+            .card-summary[data-color="red"],
+            .card-summary[data-color="green"] { background-color: #ffffff; }
+            .card-label       { color: #9ca3af; }
+            .card-value-green { color: #16a34a; }
+            .card-value-red   { color: #ef4444; }
+            .card-icon        { background-color: #f3f4f6; color: #9ca3af; }
+        }
+        
+        /* Desktop dark mode: gelap dengan teks berwarna */
+        @media (min-width: 768px) {
+            html.dark .card-summary,
+            html.dark .card-summary[data-color="red"],
+            html.dark .card-summary[data-color="green"] { background-color: #1e293b; border-color: #334155; }
+            html.dark .card-label       { color: #94a3b8; }
+            html.dark .card-value-green { color: #4ade80; }
+            html.dark .card-value-red   { color: #f87171; }
+            html.dark .card-icon        { background-color: #334155; color: #94a3b8; }
+        }
+
+        /* ── Card Summary Keuangan ── */
+        .card-keuangan              { background-color: #4b5563; }
+        .card-keuangan[data-color="green"]   { background-color: #16a34a; }
+        .card-keuangan[data-color="red"]     { background-color: #ef4444; }
+        .card-keuangan[data-color="emerald"] { background-color: #059669; }
+        .card-keuangan .card-k-label { color: #e5e7eb; }
+        .card-keuangan .card-k-value { color: #ffffff; }
+        .card-keuangan .card-k-icon  { background-color: rgba(255,255,255,0.2); color: #ffffff; }       
+
+        @media (min-width: 768px) {
+            .card-keuangan,
+            .card-keuangan[data-color="green"],
+            .card-keuangan[data-color="red"],
+            .card-keuangan[data-color="emerald"] { background-color: #ffffff; }
+            .card-keuangan .card-k-label { color: #9ca3af; }
+            .card-keuangan .card-k-icon  { background-color: #f3f4f6; color: #9ca3af; }
+            .card-keuangan[data-color="gray"]    .card-k-value { color: #1f2937; }
+            .card-keuangan[data-color="green"]   .card-k-value { color: #16a34a; }
+            .card-keuangan[data-color="red"]     .card-k-value { color: #ef4444; }
+            .card-keuangan[data-color="emerald"] .card-k-value { color: #059669; }
+        }       
+
+        @media (min-width: 768px) {
+            html.dark .card-keuangan,
+            html.dark .card-keuangan[data-color="green"],
+            html.dark .card-keuangan[data-color="red"],
+            html.dark .card-keuangan[data-color="emerald"] { background-color: #1e293b; border-color: #334155; }
+            html.dark .card-keuangan .card-k-label { color: #94a3b8; }
+            html.dark .card-keuangan .card-k-icon  { background-color: #334155; color: #94a3b8; }
+            html.dark .card-keuangan[data-color="gray"]    .card-k-value { color: #f1f5f9; }
+            html.dark .card-keuangan[data-color="green"]   .card-k-value { color: #4ade80; }
+            html.dark .card-keuangan[data-color="red"]     .card-k-value { color: #f87171; }
+            html.dark .card-keuangan[data-color="emerald"] .card-k-value { color: #34d399; }
+        }
         html.dark input, html.dark select, html.dark textarea {
             background-color: #0f172a !important;
             border-color: #334155 !important;
@@ -96,14 +163,14 @@
                 @yield('sidebar-menu')
             </nav>
             <div class="px-4 pb-6 border-t border-gray-100 pt-4">
-                <button onclick="togglePanel()" class="flex items-center gap-3 px-2 py-2 rounded-lg text-gray-600 hover:bg-gray-50 text-sm w-full">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    Pengaturan
-                </button>
                 <a href="{{ route('bantuan') }}" class="flex items-center gap-3 px-2 py-2 rounded-lg text-gray-600 hover:bg-gray-50 text-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     Bantuan
                 </a>
+                <button onclick="togglePanel()" class="flex items-center gap-3 px-2 py-2 rounded-lg text-gray-600 hover:bg-gray-50 text-sm w-full">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Pengaturan
+                </button>
                 <div class="border-t border-gray-100 mt-2 pt-2">
                     <button onclick="document.getElementById('modal-logout').classList.remove('hidden')" class="flex items-center gap-3 px-2 py-2 rounded-lg text-gray-600 hover:bg-red-50 hover:text-red-600 text-sm w-full">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
@@ -129,14 +196,14 @@
                 @yield('sidebar-menu')
             </nav>
             <div class="px-4 pb-6 border-t border-gray-100 pt-4">
-                <button onclick="togglePanel()" class="flex items-center gap-3 px-2 py-2 rounded-lg text-gray-600 hover:bg-gray-50 text-sm w-full">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    Pengaturan
-                </button>
                 <a href="{{ route('bantuan') }}" class="flex items-center gap-3 px-2 py-2 rounded-lg text-gray-600 hover:bg-gray-50 text-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     Bantuan
                 </a>
+                <button onclick="togglePanel()" class="flex items-center gap-3 px-2 py-2 rounded-lg text-gray-600 hover:bg-gray-50 text-sm w-full">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Pengaturan
+                </button>
                 <div class="border-t border-gray-100 mt-2 pt-2">
                     <button onclick="document.getElementById('modal-logout').classList.remove('hidden')" class="flex items-center gap-3 px-2 py-2 rounded-lg text-gray-600 hover:bg-red-50 hover:text-red-600 text-sm w-full">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>

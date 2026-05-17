@@ -65,56 +65,103 @@
 @endsection
 
 @section('content')
+
     {{-- Summary Cards --}}
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    {{-- HP: grid-cols-1 (numpuk), Tablet & Laptop ke atas: sm:grid-cols-4 (berjejer 4 kolom) --}}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
 
         {{-- Card Gaji --}}
-        <div class="bg-gray-600 md:bg-white rounded-2xl p-5 border border-gray-100 shadow-sm transition-all">
-            <p class="text-[10px] font-bold text-gray-200 md:text-gray-400 uppercase tracking-wider mb-2">Total Gaji Bulan
-                Ini</p>
-            <p class="text-lg font-bold text-white md:text-gray-800">
-                Rp{{ number_format($totalGajiBulanIni, 0, ',', '.') }}
-            </p>
+        <div class="card-keuangan rounded-2xl p-4 sm:p-5 border border-gray-100 flex items-start justify-between shadow-sm min-w-0"
+            data-color="gray">
+            <div class="min-w-0 flex-1 pr-2">
+                <p
+                    class="card-k-label text-[11px] sm:text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 line-clamp-2 leading-tight">
+                    Total Gaji Bulan Ini</p>
+                <p class="card-k-value text-base sm:text-sm md:text-xl font-bold break-words whitespace-normal">
+                    Rp{{ number_format($totalGajiBulanIni, 0, ',', '.') }}
+                </p>
+            </div>
+            <div class="card-k-icon w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
         </div>
 
         {{-- Card Pendapatan --}}
-        <div class="bg-green-600 md:bg-white rounded-2xl p-5 border border-gray-100 shadow-sm transition-all">
-            <p class="text-[10px] font-bold text-green-100 md:text-gray-400 uppercase tracking-wider mb-2">Total Pendapatan
-            </p>
-            <p class="text-lg font-bold text-white md:text-green-600">
-                Rp{{ number_format($keuanganBulanIni?->total_pendapatan ?? 0, 0, ',', '.') }}
-            </p>
+        <div class="card-keuangan rounded-2xl p-4 sm:p-5 border border-gray-100 flex items-start justify-between shadow-sm min-w-0"
+            data-color="green">
+            <div class="min-w-0 flex-1 pr-2">
+                <p
+                    class="card-k-label text-[11px] sm:text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 line-clamp-2 leading-tight">
+                    Total Pendapatan</p>
+                <p class="card-k-value text-base sm:text-sm md:text-xl font-bold break-words whitespace-normal">
+                    Rp{{ number_format($keuanganBulanIni?->total_pendapatan ?? 0, 0, ',', '.') }}
+                </p>
+            </div>
+            <div class="card-k-icon w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+            </div>
         </div>
 
         {{-- Card Pengeluaran --}}
-        <div class="bg-red-500 md:bg-white rounded-2xl p-5 border border-gray-100 shadow-sm transition-all">
-            <p class="text-[10px] font-bold text-red-100 md:text-gray-400 uppercase tracking-wider mb-2">Total Pengeluaran
-            </p>
-            <p class="text-lg font-bold text-white md:text-red-500">
-                Rp{{ number_format($keuanganBulanIni?->total_pengeluaran ?? 0, 0, ',', '.') }}
-            </p>
+        <div class="card-keuangan rounded-2xl p-4 sm:p-5 border border-gray-100 flex items-start justify-between shadow-sm min-w-0"
+            data-color="red">
+            <div class="min-w-0 flex-1 pr-2">
+                <p
+                    class="card-k-label text-[11px] sm:text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 line-clamp-2 leading-tight">
+                    Total Pengeluaran</p>
+                <p class="card-k-value text-base sm:text-sm md:text-xl font-bold break-words whitespace-normal">
+                    Rp{{ number_format($keuanganBulanIni?->total_pengeluaran ?? 0, 0, ',', '.') }}
+                </p>
+            </div>
+            <div class="card-k-icon w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                </svg>
+            </div>
         </div>
 
         {{-- Card Keuntungan --}}
-        <div class="bg-emerald-600 md:bg-white rounded-2xl p-5 border border-gray-100 shadow-sm transition-all">
-            <p class="text-[10px] font-bold text-emerald-100 md:text-gray-400 uppercase tracking-wider mb-2">Total
-                Keuntungan</p>
-            <p class="text-lg font-bold text-white md:text-emerald-600">
-                Rp{{ number_format($keuanganBulanIni?->keuntungan ?? 0, 0, ',', '.') }}
-            </p>
+        <div class="card-keuangan rounded-2xl p-4 sm:p-5 border border-gray-100 flex items-start justify-between shadow-sm min-w-0"
+            data-color="emerald">
+            <div class="min-w-0 flex-1 pr-2">
+                <p
+                    class="card-k-label text-[11px] sm:text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 line-clamp-2 leading-tight">
+                    Total Keuntungan</p>
+                <p class="card-k-value text-base sm:text-sm md:text-xl font-bold break-words whitespace-normal">
+                    Rp{{ number_format($keuanganBulanIni?->keuntungan ?? 0, 0, ',', '.') }}
+                </p>
+            </div>
+            <div class="card-k-icon w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+            </div>
         </div>
 
     </div>
 
-    {{-- Chart --}}
+    {{-- Chart Section --}}
+    {{-- Gaya box & font tetap 100% sama, cuma canvas dibungkus aspek rasio responsif yang dinamis --}}
     <div class="bg-white rounded-2xl p-6 border border-gray-100 mb-6">
         <p class="text-sm font-medium text-gray-700 mb-4">Grafik pendapatan (6 bulan terakhir)</p>
-        <canvas id="chartPendapatan" height="100"></canvas>
+        <div class="relative w-full h-[180px] sm:h-[240px] md:h-[260px]">
+            <canvas id="chartPendapatan"></canvas>
+        </div>
     </div>
 
     <div class="bg-white rounded-2xl p-6 border border-gray-100 mb-6">
         <p class="text-sm font-medium text-gray-700 mb-4">Grafik pengeluaran (6 bulan terakhir)</p>
-        <canvas id="chartPengeluaran" height="100"></canvas>
+        <div class="relative w-full h-[180px] sm:h-[240px] md:h-[260px]">
+            <canvas id="chartPengeluaran"></canvas>
+        </div>
     </div>
 
     {{-- Form Input Keuangan --}}
@@ -122,7 +169,8 @@
         <div class="flex items-center gap-2 mb-6">
             <div class="w-8 h-8 bg-green-100 text-green-600 rounded-lg flex items-center justify-center">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
             </div>
             <p class="text-sm font-bold text-gray-700">Input Data Keuangan Bulanan</p>
@@ -171,6 +219,22 @@
         const pendapatan = @json(collect($grafik)->pluck('pendapatan'));
         const pengeluaran = @json(collect($grafik)->pluck('pengeluaran'));
 
+        // Opsi konfigurasi chart yang mengizinkan responsivitas murni tanpa merusak aspek rasio
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false, // Memaksa chart mengikuti tinggi wrapper div di atas, bukan rasio kaku
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
         new Chart(document.getElementById('chartPendapatan'), {
             type: 'line',
             data: {
@@ -184,18 +248,7 @@
                     pointBackgroundColor: '#3b82f6',
                 }]
             },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+            options: chartOptions
         });
 
         new Chart(document.getElementById('chartPengeluaran'), {
@@ -211,95 +264,7 @@
                     pointBackgroundColor: '#ef4444',
                 }]
             },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+            options: chartOptions
         });
     </script>
 @endsection
-
-{{-- Script Update: Tambahkan maintainAspectRatio: false agar chart mengikuti tinggi wrapper --}}
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-    <script>
-        const chartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        display: true,
-                        drawBorder: false,
-                        color: '#f3f4f6'
-                    },
-                    ticks: {
-                        font: {
-                            size: 10
-                        },
-                        color: '#9ca3af'
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        font: {
-                            size: 10
-                        },
-                        color: '#9ca3af'
-                    }
-                }
-            }
-        };
-
-        const labels = @json(collect($grafik)->pluck('bulan'));
-
-        new Chart(document.getElementById('chartPendapatan'), {
-            type: 'line',
-            data: {
-                labels,
-                datasets: [{
-                    data: @json(collect($grafik)->pluck('pendapatan')),
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59,130,246,0.05)',
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointHoverRadius: 6
-                }]
-            },
-            options: chartOptions
-        });
-
-        new Chart(document.getElementById('chartPengeluaran'), {
-            type: 'line',
-            data: {
-                labels,
-                datasets: [{
-                    data: @json(collect($grafik)->pluck('pengeluaran')),
-                    borderColor: '#ef4444',
-                    backgroundColor: 'rgba(239,68,68,0.05)',
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointHoverRadius: 6
-                }]
-            },
-            options: chartOptions
-        });
-    </script> --}}
