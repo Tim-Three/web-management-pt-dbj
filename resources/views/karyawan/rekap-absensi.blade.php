@@ -5,7 +5,7 @@
 @section('sidebar-menu')
     <a href="{{ route('karyawan.beranda') }}"
         class="flex items-center gap-3 px-2 py-2 rounded-lg text-sm mb-1 transition
-            {{ request()->routeIs('karyawan.beranda') ? 'bg-green-50 text-green-700 font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700' }}">
+                {{ request()->routeIs('karyawan.beranda') ? 'bg-green-50 text-green-700 font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700' }}">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path
                 d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
@@ -14,7 +14,7 @@
     </a>
     <a href="{{ route('karyawan.riwayat.absen') }}"
         class="flex items-center gap-3 px-2 py-2 rounded-lg text-sm mb-1 transition
-            {{ request()->routeIs('karyawan.riwayat.absen') ? 'bg-green-50 text-green-700 font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700' }}">
+                {{ request()->routeIs('karyawan.riwayat.absen') ? 'bg-green-50 text-green-700 font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700' }}">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -23,7 +23,7 @@
     </a>
     <a href="{{ route('karyawan.rekap.absensi') }}"
         class="flex items-center gap-3 px-2 py-2 rounded-lg text-sm mb-1 transition
-            {{ request()->routeIs('karyawan.rekap.absensi') ? 'bg-green-50 text-green-700 font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700' }}">
+                {{ request()->routeIs('karyawan.rekap.absensi') ? 'bg-green-50 text-green-700 font-medium' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-700' }}">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -32,7 +32,7 @@
     </a>
     <a href="{{ route('karyawan.riwayat.cuti') }}"
         class="flex items-center gap-3 px-2 py-2 rounded-lg text-sm mb-1 transition
-            {{ request()->routeIs('karyawan.riwayat.cuti') ? 'bg-green-50 text-green-700 font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700' }}">
+                {{ request()->routeIs('karyawan.riwayat.cuti') ? 'bg-green-50 text-green-700 font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700' }}">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -125,8 +125,8 @@
             <p class="text-sm font-bold text-green-600">{{ $persentaseHadir }}%</p>
         </div>
         <div class="w-full bg-gray-100 rounded-full h-2.5">
-            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-700"
-                style="width: {{ $persentaseHadir }}%"></div>
+            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-700" style="width: {{ $persentaseHadir }}%">
+            </div>
         </div>
         <p class="text-[11px] text-gray-400 mt-2 italic text-center sm:text-left">
             {{ $rekap['hadir'] + $rekap['telat'] }} masuk / {{ $hariKerja }} hari kerja
