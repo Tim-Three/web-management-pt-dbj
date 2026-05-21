@@ -118,8 +118,16 @@
                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 bg-white">
                             <option value="">-- Pilih posisi --</option>
                             @foreach ($listPosisi as $value => $label)
-                                <option value="{{ $value }}">{{ $label }}</option>
+                                <option value="{{ $value }}" {{ old('posisi', $karyawan->posisi) === $value ? 'selected' : '' }}>{{ $label }}</option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400 mb-1 block">Shift kerja <span class="text-red-400">*</span></label>
+                        <select name="shift" required
+                            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 bg-white">
+                            <option value="pagi" {{ old('shift', $karyawan->shift) === 'pagi' ? 'selected' : '' }}>☀️ Shift Pagi (08:00–14:00)</option>
+                            <option value="malam" {{ old('shift', $karyawan->shift) === 'malam' ? 'selected' : '' }}>🌙 Shift Malam (14:00–20:00)</option>
                         </select>
                     </div>
                     <div>

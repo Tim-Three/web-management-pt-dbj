@@ -15,6 +15,17 @@ class AbsensiController extends Controller
         $user = auth()->user();
         $today = Carbon::today();
 
+        // Blokir weekend
+        if ($today->isSaturday() || $today->isSunday()) {
+            return back()->with('error', 'Absensi tidak tersedia pada hari Sabtu & Minggu.');
+        }
+
+        // Blokir sebelum jam shift
+        if (!$user->isWaktuShift()) {
+            $jamMulai = $user->shift === 'malam' ? '14:00' : '08:00';
+            return back()->with('error', "Shift {$user->shift} Anda dimulai pukul {$jamMulai}. Tombol absensi belum tersedia.");
+        }
+
         $cutiAktif = Cuti::where('user_id', $user->id)
             ->where('status', 'disetujui')
             ->where('dari', '<=', $today)
@@ -33,8 +44,8 @@ class AbsensiController extends Controller
             return back()->with('error', 'Anda sudah melakukan absen masuk hari ini.');
         }
 
-        $jamMasuk = Carbon::now();
-        $batasTepat = Carbon::today()->setTime(8, 0);
+        $jamMasuk  = Carbon::now();
+        $batasTepat = Carbon::today()->setTimeFromTimeString($user->getJamMulaiShift());
         $status = $jamMasuk->gt($batasTepat) ? 'telat' : 'hadir';
 
         Absensi::create([
@@ -51,6 +62,11 @@ class AbsensiController extends Controller
     {
         $user = auth()->user();
         $today = Carbon::today();
+
+        // Blokir weekend
+        if ($today->isSaturday() || $today->isSunday()) {
+            return back()->with('error', 'Absensi tidak tersedia pada hari Sabtu & Minggu.');
+        }
 
         $absensi = Absensi::where('user_id', $user->id)
             ->whereDate('tanggal', $today)
@@ -79,6 +95,4 @@ class AbsensiController extends Controller
 
         return view('karyawan.riwayat-absen', compact('riwayat'));
     }
-
-    
 }

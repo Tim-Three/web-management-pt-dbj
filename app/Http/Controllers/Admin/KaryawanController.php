@@ -65,6 +65,7 @@ class KaryawanController extends Controller
             'password' => 'required|min:8',
             'nip'      => 'nullable|unique:users',
             'posisi'   => 'nullable|string',
+            'shift'    => 'required|in:pagi,malam',
             'no_telp'  => 'nullable|string',
             'domisili' => 'nullable|string',
             'foto'     => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
@@ -82,6 +83,7 @@ class KaryawanController extends Controller
             'role'     => 'karyawan',
             'nip'      => $request->nip,
             'posisi'   => $request->posisi,
+            'shift'    => $request->shift,
             'no_telp'  => $request->no_telp,
             'domisili' => $request->domisili,
             'foto'     => $fotoPath,
@@ -103,12 +105,13 @@ class KaryawanController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users,email,' . $karyawan->id,
             'posisi'   => 'nullable|string',
+            'shift'    => 'required|in:pagi,malam',
             'no_telp'  => 'nullable|string',
             'domisili' => 'nullable|string',
             'foto'     => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $data = $request->only(['name', 'email', 'posisi', 'no_telp', 'domisili']);
+        $data = $request->only(['name', 'email', 'posisi', 'shift', 'no_telp', 'domisili']);
 
         if ($request->hasFile('foto')) {
             // Hapus foto lama kalau ada

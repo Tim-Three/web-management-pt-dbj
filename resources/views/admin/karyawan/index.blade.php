@@ -68,11 +68,11 @@
 
     {{-- Summary Cards (Format yang konsisten dengan Row 1) --}}
     <div class="flex flex-col gap-4 mb-6 md:grid md:grid-cols-4">
-    
+
         {{-- Container buat Mobile (Flex Row) / Buat Desktop (Langsung Grid) --}}
         {{-- Di HP dia bakal bagi dua kolom (50-50), di Desktop dia bakal jadi bagian dari grid 4 kolom --}}
         <div class="flex flex-row md:contents gap-4">
-    
+
             {{-- 1. Total Karyawan Card (Hijau) --}}
             <div class="bg-green-600 rounded-2xl p-4 md:p-5 flex items-start justify-between min-h-[112px] w-1/2 md:w-full">
                 <div>
@@ -80,15 +80,18 @@
                     <p class="text-3xl md:text-5xl font-bold text-white">{{ $totalKaryawan }}</p>
                 </div>
                 <div class="min-w-8 h-8 md:w-9 md:h-9 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                 </div>
             </div>
-    
+
             {{-- 2. Detail Kehadiran Card (Gabungan Hadir, Telat, Izin di HP) --}}
             {{-- Di HP ini jadi satu kotak gede sebelah kanan --}}
-            <div class="bg-white rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between min-h-[112px] w-1/2 md:hidden">
+            <div
+                class="bg-white rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between min-h-[112px] w-1/2 md:hidden">
                 <div class="flex-1">
                     <p class="text-2xs text-gray-400 mb-2">Detail kehadiran <br> hari ini</p>
                     <div class="flex justify-start gap-3">
@@ -107,7 +110,7 @@
                     </div>
                 </div>
             </div>
-    
+
             {{-- 3. Tampilan Desktop buat Hadir, Telat, Izin (Terpisah 3 kolom) --}}
             <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
                 <p class="text-xs text-gray-400 mb-2">Hadir hari ini</p>
@@ -121,7 +124,7 @@
                 <p class="text-xs text-gray-400 mb-2">Izin/Cuti hari ini</p>
                 <p class="text-3xl font-bold text-gray-800">{{ $izin }}</p>
             </div>
-    
+
         </div>
     </div>
 
@@ -141,87 +144,124 @@
             </button>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-3xs md:text-sm min-w-full sm:min-w-[800px] table-fixed sm:table-auto">
-                <thead class="bg-gray-50 text-gray-400 text-2xs md:text-xs">
-                <tr>
-                    <th class="w-1/2 sm:w-auto px-3 md:px-6 py-2 md:py-3 text-left font-medium">Nama</th>
-                <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden sm:table-cell">Posisi</th>
-                <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">Email</th>
-                <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">No. Telp</th>
-                <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden xl:table-cell">Domisili</th>
-                <th class="w-1/4 sm:w-auto px-3 md:px-6 py-2 md:py-3 text-center font-medium">Status</th>
-                <th class="w-1/4 sm:w-auto px-3 md:px-6 py-2 md:py-3 text-center font-medium">Aksi</th>
+        <div class="overflow-x-auto w-full">
+    {{-- Mengubah font dasar tabel dari text-3xs ke text-xs di mobile --}}
+    <table class="w-full text-xs md:text-sm min-w-max table-auto">
+        {{-- Mengubah font header dari text-2xs ke text-xs --}}
+        <thead class="bg-gray-50 text-gray-500 text-xs font-semibold uppercase tracking-wider">
+            <tr>
+                <th class="px-4 md:px-6 py-3 text-left whitespace-nowrap">Nama</th>
+                <th class="px-4 md:px-6 py-3 text-left whitespace-nowrap">Posisi</th>
+                <th class="px-4 md:px-6 py-3 text-left whitespace-nowrap">Shift</th>
+                <th class="px-4 md:px-6 py-3 text-left whitespace-nowrap">Email</th>
+                <th class="px-4 md:px-6 py-3 text-left whitespace-nowrap">No. Telp</th>
+                <th class="px-4 md:px-6 py-3 text-left whitespace-nowrap">Domisili</th>
+                <th class="px-4 md:px-6 py-3 text-center whitespace-nowrap">Status</th>
+                <th class="px-4 md:px-6 py-3 text-center whitespace-nowrap">Aksi</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 bg-white">
+            @forelse($karyawan as $k)
+                @php
+                    $absen = $k->absensis->first();
+                    $badge = match ($absen?->status ?? 'alpha') {
+                        'hadir' => ['bg-green-100 text-green-700', 'Masuk'],
+                        'telat' => ['bg-yellow-100 text-yellow-700', 'Telat'],
+                        'izin' => ['bg-blue-100 text-blue-700', 'Izin'],
+                        default => ['bg-red-100 text-red-600', 'Alpha'],
+                    };
+                @endphp
+                <tr class="hover:bg-gray-50/75 transition-colors">
+                    {{-- Kolom Nama --}}
+                    <td class="px-4 md:px-6 py-3.5 whitespace-nowrap">
+                        <div class="flex items-center gap-3">
+                            <img src="{{ $k->foto ? Storage::url($k->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($k->name) . '&background=6366f1&color=fff' }}"
+                                class="w-9 h-9 rounded-full flex-shrink-0 object-cover shadow-sm">
+                            <div>
+                                {{-- Text nama diubah dari text-2xs ke text-xs (mobile) dan text-sm (md) --}}
+                                <p class="font-semibold text-gray-800 text-xs md:text-sm">{{ $k->name }}</p>
+                                {{-- Text NIP diubah dari text-3xs ke text-2xs (mobile) dan text-xs (md) --}}
+                                <p class="text-2xs md:text-xs text-gray-400 mt-0.5">{{ $k->nip ?? '-' }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    
+                    {{-- Kolom Posisi --}}
+                    <td class="px-4 md:px-6 py-3.5 text-gray-600 whitespace-nowrap">
+                        {{ $k->posisi ?? '-' }}
+                    </td>
+                    
+                    {{-- Kolom Shift --}}
+                    <td class="px-4 md:px-6 py-3.5 whitespace-nowrap">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium
+                            {{ ($k->shift ?? 'pagi') === 'malam' ? 'bg-indigo-50 text-indigo-600' : 'bg-amber-50 text-amber-600' }}">
+                            @if(($k->shift ?? 'pagi') === 'malam')
+                                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                                </svg>
+                                Malam
+                            @else
+                                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                                </svg>
+                                Pagi
+                            @endif
+                        </span>
+                    </td>
+                    
+                    {{-- Kolom Email --}}
+                    <td class="px-4 md:px-6 py-3.5 text-gray-600 whitespace-nowrap">
+                        {{ $k->email }}
+                    </td>
+                    
+                    {{-- Kolom No Telp --}}
+                    <td class="px-4 md:px-6 py-3.5 text-gray-600 whitespace-nowrap">
+                        {{ $k->no_telp ?? '-' }}
+                    </td>
+                    
+                    {{-- Kolom Domisili --}}
+                    <td class="px-4 md:px-6 py-3.5 text-gray-600 whitespace-nowrap">
+                        {{ $k->domisili ?? '-' }}
+                    </td>
+                    
+                    {{-- Kolom Status Absen --}}
+                    <td class="px-4 md:px-6 py-3.5 text-center whitespace-nowrap">
+                        {{-- Badge text diubah ke text-xs konstan agar pas dibaca --}}
+                        <span class="px-2.5 py-1 rounded-lg text-xs font-semibold {{ $badge[0] }}">
+                            {{ $badge[1] }}
+                        </span>
+                    </td>
+                    
+                    {{-- Kolom Aksi --}}
+                    <td class="px-4 md:px-6 py-3.5 text-center whitespace-nowrap">
+                        <div class="flex items-center justify-center gap-2">
+                            {{-- Button Edit & Hapus teksnya diubah ke text-xs --}}
+                            <a href="{{ route('admin.karyawan.edit', $k) }}"
+                                class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold rounded-lg transition">
+                                Edit
+                            </a>
+                            <form method="POST" action="{{ route('admin.karyawan.destroy', $k) }}"
+                                onsubmit="return confirm('Yakin ingin menghapus karyawan ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-semibold rounded-lg transition">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-50">
-                @forelse($karyawan as $k)
-                    @php
-                        $absen = $k->absensis->first();
-                        $badge = match ($absen?->status ?? 'alpha') {
-                            'hadir' => ['bg-green-100 text-green-700', 'Masuk'],
-                            'telat' => ['bg-yellow-100 text-yellow-700', 'Telat'],
-                            'izin' => ['bg-blue-100 text-blue-700', 'Izin'],
-                            default => ['bg-red-100 text-red-600', 'Alpha'],
-                        };
-                    @endphp
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-3 md:px-6 py-2 md:py-4">
-                            <div class="flex items-center gap-2 md:gap-3">
-                                <img src="{{ $k->foto ? Storage::url($k->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($k->name) . '&background=6366f1&color=fff' }}"
-                                    class="w-8 h-8 md:w-9 md:h-9 rounded-full flex-shrink-0 object-cover">
-                                <div>
-                                    <p class="font-medium text-gray-800 text-2xs md:text-sm">{{ $k->name }}</p>
-                                    <p class="text-3xs md:text-xs text-gray-400">{{ $k->nip ?? '-' }}</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden sm:table-cell">
-                            {{ $k->posisi ?? '-' }}
-                        </td>
-                        <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden md:table-cell">
-                            {{ $k->email }}
-                        </td>
-                        <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden md:table-cell">
-                            {{ $k->no_telp ?? '-' }}
-                        </td>
-                        <td class="px-3 md:px-6 py-2 md:py-4 text-gray-500 text-2xs md:text-sm hidden xl:table-cell">
-                            {{ $k->domisili ?? '-' }}
-                        </td>
-                        <td class="px-3 md:px-6 py-2 md:py-4 text-center">
-                            <span
-                                class="px-1.5 py-0.5 md:px-2.5 md:py-1 rounded-full text-3xs md:text-xs font-medium {{ $badge[0] }}">
-                                {{ $badge[1] }}
-                            </span>
-                        </td>
-                        <td class="px-3 md:px-6 py-2 md:py-4 text-center">
-                            <div class="flex items-center justify-center gap-1 md:gap-2">
-                                <a href="{{ route('admin.karyawan.edit', $k) }}"
-                                    class="px-2 py-1 md:px-3 md:py-1.5 bg-gray-100 text-gray-600 text-3xs md:text-xs font-medium rounded-lg hover:bg-gray-200 transition">
-                                    Edit
-                                </a>
-                                <form method="POST" action="{{ route('admin.karyawan.destroy', $k) }}"
-                                    onsubmit="return confirm('Yakin ingin menghapus karyawan ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="px-2 py-1 md:px-3 md:py-1.5 bg-red-100 text-red-600 text-3xs md:text-xs font-medium rounded-lg hover:bg-red-200 transition">
-                                        Hapus
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="7" class="px-3 md:px-6 py-8 md:py-10 text-center text-gray-400 text-2xs md:text-sm">
-                            Belum
-                            ada data karyawan.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        </div>
+            @empty
+                <tr>
+                    <td colspan="8" class="px-4 md:px-6 py-10 text-center text-gray-400 text-xs md:text-sm">
+                        Belum ada data karyawan.
+                    </td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
         <div class="px-6 py-4">{{ $karyawan->links() }}</div>
     </div>
 
@@ -264,7 +304,8 @@
                                 class="w-full border border-gray-200 rounded-xl px-4 py-2.5 pr-10 text-sm focus:outline-none focus:border-green-500">
                             <button type="button" onclick="togglePassword('password-tambah', 'eye-tambah')"
                                 class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                                <svg id="eye-tambah" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg id="eye-tambah" class="w-4 h-4" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -284,6 +325,15 @@
                         </select>
                     </div>
                     <div>
+                        <label class="text-xs text-gray-400 mb-1 block">Shift kerja <span
+                                class="text-red-400">*</span></label>
+                        <select name="shift" required
+                            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 bg-white">
+                            <option value="pagi">☀️ Shift Pagi (08:00–14:00)</option>
+                            <option value="malam">🌙 Shift Malam (14:00–20:00)</option>
+                        </select>
+                    </div>
+                    <div>
                         <label class="text-xs text-gray-400 mb-1 block">No. Telepon</label>
                         <input type="text" name="no_telp" placeholder="08xx-xxxx-xxxx"
                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500">
@@ -298,7 +348,8 @@
                         <div class="flex items-center gap-4">
                             <div id="preview-tambah"
                                 class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
-                                <svg class="w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-6 h-6 text-gray-300" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>

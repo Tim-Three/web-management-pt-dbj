@@ -182,39 +182,96 @@
 
     {{-- Lakukan Absensi --}}
     <div class="bg-white rounded-2xl p-5 border border-gray-100 mb-6">
-        <p class="text-sm font-medium text-gray-700 mb-4">Lakukan absensi</p>
+        <div class="flex items-center justify-between mb-4">
+            <p class="text-sm font-medium text-gray-700">Lakukan absensi</p>
+            {{-- Badge shift --}}
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold
+                {{ $user->shift === 'malam' ? 'bg-indigo-50 text-indigo-600' : 'bg-amber-50 text-amber-600' }}">
+                @if($user->shift === 'malam')
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                    Shift Malam · {{ $jamMulaiShift }}–{{ $jamSelesaiShift }}
+                @else
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+                    Shift Pagi · {{ $jamMulaiShift }}–{{ $jamSelesaiShift }}
+                @endif
+            </span>
+        </div>
+
+        @php
+            $sedangCuti      = $cutiAktif !== null;
+            $sudahAbsenMasuk = $absensiHariIni !== null;
+            $sudahAbsenPulang = $absensiHariIni?->jam_pulang !== null;
+
+            // Tombol masuk: disabled jika weekend, belum waktu shift, cuti, atau sudah absen
+            $disableMasuk = $isWeekend || !$isWaktuShift || $sedangCuti || $sudahAbsenMasuk;
+
+            // Tombol pulang: disabled jika weekend, belum absen masuk, sudah absen pulang
+            $disablePulang = $isWeekend || $sedangCuti || !$sudahAbsenMasuk || $sudahAbsenPulang;
+
+            // Label & style tombol masuk
+            if ($isWeekend) {
+                $labelMasuk = 'Hari Libur';
+                $styleMasuk = 'bg-gray-100 text-gray-400 cursor-not-allowed';
+            } elseif ($sedangCuti) {
+                $labelMasuk = 'Sedang Cuti';
+                $styleMasuk = 'bg-blue-100 text-blue-400 cursor-not-allowed';
+            } elseif ($sudahAbsenMasuk) {
+                $labelMasuk = 'Sudah Absen';
+                $styleMasuk = 'bg-gray-200 text-gray-400 cursor-not-allowed';
+            } elseif (!$isWaktuShift) {
+                $labelMasuk = 'Mulai ' . $jamMulaiShift;
+                $styleMasuk = 'bg-gray-100 text-gray-400 cursor-not-allowed';
+            } else {
+                $labelMasuk = 'Absen Masuk';
+                $styleMasuk = 'bg-green-600 text-white hover:bg-green-700 active:scale-95';
+            }
+
+            // Style tombol pulang
+            $stylePulang = $disablePulang
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                : 'bg-gray-700 text-white hover:bg-gray-800 active:scale-95';
+        @endphp
+
+        {{-- Info weekend --}}
+        @if($isWeekend)
+            <div class="flex items-center gap-2 mb-4 px-3 py-2.5 bg-orange-50 border border-orange-100 rounded-xl">
+                <svg class="w-4 h-4 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <p class="text-xs text-orange-600 font-medium">Absensi tidak tersedia pada hari Sabtu & Minggu.</p>
+            </div>
+        @elseif(!$isWaktuShift)
+            <div class="flex items-center gap-2 mb-4 px-3 py-2.5 bg-yellow-50 border border-yellow-100 rounded-xl">
+                <svg class="w-4 h-4 text-yellow-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-xs text-yellow-700 font-medium">Shift kamu dimulai pukul {{ $jamMulaiShift }}. Tombol absensi akan aktif saat itu.</p>
+            </div>
+        @endif
+
         <div class="grid grid-cols-2 gap-3">
-            @php
-                $sedangCuti = $cutiAktif !== null;
-                $sudahAbsenMasuk = $absensiHariIni !== null;
-                $sudahAbsenPulang = $absensiHariIni?->jam_pulang !== null;
-            @endphp
             <form method="POST" action="{{ route('karyawan.absen.masuk') }}">
                 @csrf
-                <button type="submit" {{ $sudahAbsenMasuk || $sedangCuti ? 'disabled' : '' }}
-                    class="w-full py-4 rounded-xl font-semibold text-sm transition
-                                                        {{ $sudahAbsenMasuk
-        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-        : ($sedangCuti
-            ? 'bg-blue-100 text-blue-400 cursor-not-allowed'
-            : 'bg-green-600 text-white hover:bg-green-700 active:scale-95') }}">
-                    {{ $sedangCuti ? 'Sedang Cuti' : 'Absen Masuk' }}
+                <button type="submit" {{ $disableMasuk ? 'disabled' : '' }}
+                    class="w-full py-4 rounded-xl font-semibold text-sm transition {{ $styleMasuk }}">
+                    {{ $labelMasuk }}
                 </button>
             </form>
             <form method="POST" action="{{ route('karyawan.absen.pulang') }}">
                 @csrf
-                <button type="submit" {{ $sedangCuti || !$sudahAbsenMasuk || $sudahAbsenPulang ? 'disabled' : '' }}
-                    class="w-full py-4 rounded-xl font-semibold text-sm transition
-                                                        {{ $sedangCuti || !$sudahAbsenMasuk || $sudahAbsenPulang
-        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-        : 'bg-gray-700 text-white hover:bg-gray-800 active:scale-95' }}">
-                    Absen Pulang
+                <button type="submit" {{ $disablePulang ? 'disabled' : '' }}
+                    class="w-full py-4 rounded-xl font-semibold text-sm transition {{ $stylePulang }}">
+                    @if($isWeekend)
+                        Hari Libur
+                    @else
+                        Absen Pulang
+                    @endif
                 </button>
             </form>
         </div>
 
         {{-- Show check-in/out times on mobile if already checked in --}}
-        @if ($absensiHariIni)
+        @if ($absensiHariIni && !$isWeekend)
             <div class="md:hidden mt-4 pt-4 border-t border-gray-50 grid grid-cols-2 gap-3 text-center">
                 <div>
                     <p class="text-xs text-gray-400 mb-1">Jam masuk</p>

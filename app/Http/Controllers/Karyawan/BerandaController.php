@@ -12,7 +12,7 @@ class BerandaController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
+        $user  = auth()->user();
         $today = Carbon::today();
 
         // Auto set status izin kalau lagi cuti & belum ada record absen hari ini
@@ -49,13 +49,23 @@ class BerandaController extends Controller
             ->limit(6)
             ->get();
 
+        // ── Info shift & kondisi absensi ──────────────────────────────────
+        $isWeekend      = $today->isSaturday() || $today->isSunday();
+        $isWaktuShift   = $user->isWaktuShift();
+        $jamMulaiShift  = $user->shift === 'malam' ? '14:00' : '08:00';
+        $jamSelesaiShift = $user->shift === 'malam' ? '20:00' : '14:00';
+
         return view('karyawan.beranda', compact(
             'user',
             'absensiHariIni',
             'cutiAktif',
             'riwayatAbsen',
             'riwayatCuti',
-            'today'
+            'today',
+            'isWeekend',
+            'isWaktuShift',
+            'jamMulaiShift',
+            'jamSelesaiShift',
         ));
     }
 }

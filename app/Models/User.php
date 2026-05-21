@@ -25,10 +25,36 @@ class User extends Authenticatable
         'role',
         'nip',
         'posisi',
+        'shift',
         'no_telp',
         'domisili',
         'foto',
     ];
+
+    /**
+     * Kembalikan jam mulai shift dalam format H:i:s
+     */
+    public function getJamMulaiShift(): string
+    {
+        return $this->shift === 'malam' ? '14:00:00' : '08:00:00';
+    }
+
+    /**
+     * Kembalikan jam selesai shift dalam format H:i:s
+     */
+    public function getJamSelesaiShift(): string
+    {
+        return $this->shift === 'malam' ? '20:00:00' : '14:00:00';
+    }
+
+    /**
+     * Apakah sekarang sudah masuk waktu shift?
+     */
+    public function isWaktuShift(): bool
+    {
+        $now = \Carbon\Carbon::now()->format('H:i:s');
+        return $now >= $this->getJamMulaiShift();
+    }
 
     public function isAdmin(): bool
     {
