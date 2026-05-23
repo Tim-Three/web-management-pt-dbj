@@ -9,7 +9,7 @@ Route::get('/', fn() => redirect('/login'));
 // Auth routes (dari Breeze)
 require __DIR__ . '/auth.php';
 
-// ─── KARYAWAN ROUTES ───────────────────────────────
+// ─── KARYAWAN ROUTES ─────────────────────────────── 
 Route::middleware(['auth', 'karyawan'])->prefix('karyawan')->name('karyawan.')->group(function () {
     Route::get('/beranda', [App\Http\Controllers\Karyawan\BerandaController::class, 'index'])->name('beranda');
     Route::post('/absen/masuk', [App\Http\Controllers\Karyawan\AbsensiController::class, 'absenMasuk'])->name('absen.masuk');

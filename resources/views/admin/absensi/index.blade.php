@@ -179,12 +179,12 @@
 
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left">
-                    <thead class="bg-gray-50 text-gray-400 text-[10px] uppercase tracking-tighter sm:tracking-normal">
+                    <thead class="bg-gray-50 text-gray-500 text-xs font-semibold uppercase tracking-wider">
                         <tr>
-                            <th class="px-5 py-3 font-medium">Karyawan</th>
-                            <th class="px-5 py-3 font-medium text-center">Tgl</th>
-                            <th class="px-5 py-3 font-medium text-center">Masuk</th>
-                            <th class="px-5 py-3 font-medium text-center">Status</th>
+                            <th class="px-5 py-3 text-left whitespace-nowrap">Karyawan</th>
+                            <th class="px-5 py-3 text-center whitespace-nowrap">Tgl</th>
+                            <th class="px-5 py-3 text-center whitespace-nowrap">Masuk</th>
+                            <th class="px-5 py-3 text-center whitespace-nowrap">Status</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-50">

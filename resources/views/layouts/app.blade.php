@@ -8,6 +8,7 @@
     <title>Manajemen P&K PT DBJ</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('icon.png') }}">
 
     {{-- Dark mode styles --}}
     <style>

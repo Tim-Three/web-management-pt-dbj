@@ -346,11 +346,11 @@
                     semua →</a>
             </div>
             <table class="w-full text-3xs md:text-sm min-w-full">
-                <thead class="bg-gray-50 text-gray-400 text-2xs md:text-xs">
+                <thead class="bg-gray-50 text-gray-500 text-xs font-semibold uppercase tracking-wider">
                     <tr>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Tanggal</th>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Masuk</th>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Keluar</th>
+                        <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap">Tanggal</th>
+                        <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap">Masuk</th>
+                        <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap">Keluar</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
@@ -394,11 +394,11 @@
                     semua →</a>
             </div>
             <table class="w-full text-3xs md:text-sm min-w-full">
-                <thead class="bg-gray-50 text-gray-400 text-2xs md:text-xs">
+                <thead class="bg-gray-50 text-gray-500 text-xs font-semibold uppercase tracking-wider">
                     <tr>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Tanggal pengajuan</th>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Dari</th>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Sampai</th>
+                        <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap">Tanggal pengajuan</th>
+                        <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap">Dari</th>
+                        <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap">Sampai</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
