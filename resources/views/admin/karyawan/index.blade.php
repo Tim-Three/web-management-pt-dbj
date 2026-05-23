@@ -267,7 +267,7 @@
 
     {{-- Modal Tambah Karyawan --}}
     <div id="modal-tambah" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-        <div class="bg-white rounded-2xl w-full max-w-lg mx-4 p-6 shadow-xl overflow-y-scroll max-h-screen">
+        <div class="bg-white rounded-2xl w-full max-w-lg mx-4 p-6 shadow-xl overflow-hidden max-h-screen">
             <div class="flex items-center justify-between mb-5">
                 <h3 class="text-base font-semibold text-gray-800">Tambah karyawan baru</h3>
                 <button onclick="document.getElementById('modal-tambah').classList.add('hidden')"
@@ -278,7 +278,7 @@
                 </button>
             </div>
             <form method="POST" action="{{ route('admin.karyawan.store') }}" enctype="multipart/form-data"
-                class="overflow-y-scroll">
+                class="overflow-hidden">
                 @csrf
                 <div class="flex flex-col md:grid md:grid-cols-2 gap-4 mb-4">
                     <div>
@@ -329,8 +329,8 @@
                                 class="text-red-400">*</span></label>
                         <select name="shift" required
                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green-500 bg-white">
-                            <option value="pagi">☀️ Shift Pagi (08:00–14:00)</option>
-                            <option value="malam">🌙 Shift Malam (14:00–20:00)</option>
+                            <option value="pagi">Shift Pagi (08:00–14:00)</option>
+                            <option value="malam">Shift Malam (14:00–20:00)</option>
                         </select>
                     </div>
                     <div>

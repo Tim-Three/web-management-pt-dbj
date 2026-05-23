@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'posisi'   => 'Staff Operasional',
             'no_telp'  => '0821-4295-2954',
             'domisili' => 'Subang, Jawa Barat',
-            'foto'     => null, // ← ganti jadi null, bukan ''
+            'foto'     => null, 
         ]);
     }
 }

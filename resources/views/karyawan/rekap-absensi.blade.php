@@ -142,12 +142,12 @@
 
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left border-collapse">
-                <thead class="bg-gray-50 text-gray-400 text-[10px] uppercase tracking-wider">
+                <thead class="bg-gray-50 text-gray-500 text-xs font-semibold uppercase tracking-wider">
                     <tr>
-                        <th class="px-5 py-3 font-semibold">Tanggal</th>
-                        <th class="px-5 py-3 font-semibold text-center">Masuk</th>
-                        <th class="px-5 py-3 font-semibold text-center">Pulang</th>
-                        <th class="px-5 py-3 font-semibold text-center">Status</th>
+                        <th class="px-5 py-3 text-left whitespace-nowrap">Tanggal</th>
+                        <th class="px-5 py-3 text-center whitespace-nowrap">Masuk</th>
+                        <th class="px-5 py-3 text-center whitespace-nowrap">Pulang</th>
+                        <th class="px-5 py-3 text-center whitespace-nowrap">Status</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">

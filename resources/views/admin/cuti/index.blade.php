@@ -79,16 +79,15 @@
         @if($pending->count() > 0)
             <div class="overflow-x-auto">
                 <table class="w-full text-3xs md:text-sm min-w-full">
-                    <thead class="bg-gray-50 text-gray-400 text-2xs md:text-xs">
+                    <thead class="bg-gray-50 text-gray-500 text-xs font-semibold uppercase tracking-wider">
                         <tr>
-                            <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Nama</th>
-                            <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden sm:table-cell">Posisi</th>
-                            <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">Alasan cuti</th>
-                            <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium hidden md:table-cell">Tanggal izin</th>
-                            <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Tanggal mulai</th>
-                            <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium hidden sm:table-cell">Tanggal akhir
-                            </th>
-                            <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Aksi</th>
+                            <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap">Nama</th>
+                            <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap hidden sm:table-cell">Posisi</th>
+                            <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap hidden md:table-cell">Alasan cuti</th>
+                            <th class="px-3 md:px-6 py-3 text-center whitespace-nowrap hidden md:table-cell">Tanggal izin</th>
+                            <th class="px-3 md:px-6 py-3 text-center whitespace-nowrap">Tanggal mulai</th>
+                            <th class="px-3 md:px-6 py-3 text-center whitespace-nowrap hidden sm:table-cell">Tanggal akhir</th>
+                            <th class="px-3 md:px-6 py-3 text-center whitespace-nowrap">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-50">
@@ -159,16 +158,15 @@
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-3xs md:text-sm min-w-full">
-                <thead class="bg-gray-50 text-gray-400 text-2xs md:text-xs">
+                <thead class="bg-gray-50 text-gray-500 text-xs font-semibold uppercase tracking-wider">
                     <tr>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium">Nama</th>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden sm:table-cell">Posisi</th>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-left font-medium hidden md:table-cell">Alasan cuti</th>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium hidden md:table-cell">Tanggal izin</th>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Tanggal mulai</th>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium hidden sm:table-cell">Tanggal akhir
-                        </th>
-                        <th class="px-3 md:px-6 py-2 md:py-3 text-center font-medium">Status</th>
+                        <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap">Nama</th>
+                        <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap hidden sm:table-cell">Posisi</th>
+                        <th class="px-3 md:px-6 py-3 text-left whitespace-nowrap hidden md:table-cell">Alasan cuti</th>
+                        <th class="px-3 md:px-6 py-3 text-center whitespace-nowrap hidden md:table-cell">Tanggal izin</th>
+                        <th class="px-3 md:px-6 py-3 text-center whitespace-nowrap">Tanggal mulai</th>
+                        <th class="px-3 md:px-6 py-3 text-center whitespace-nowrap hidden sm:table-cell">Tanggal akhir</th>
+                        <th class="px-3 md:px-6 py-3 text-center whitespace-nowrap">Status</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">

@@ -157,18 +157,16 @@
 
             <div class="overflow-x-auto">
                 <table class="w-full text-3xs md:text-sm min-w-full">
-                    <thead class="bg-gray-50 text-gray-400 text-2xs md:text-xs">
+                    <thead class="bg-gray-50 text-gray-500 text-xs font-semibold uppercase tracking-wider">
                         <tr>
-                            <th class="px-3 md:px-5 py-2 md:py-3 text-left font-medium">Nama</th>
-                            <th class="px-3 md:px-5 py-2 md:py-3 text-left font-medium hidden sm:table-cell">Posisi</th>
-                            <th class="px-3 md:px-5 py-2 md:py-3 text-right font-medium hidden md:table-cell">Gaji pokok
-                            </th>
-                            <th class="px-3 md:px-5 py-2 md:py-3 text-right font-medium hidden md:table-cell">Tunjangan
-                            </th>
-                            <th class="px-3 md:px-5 py-2 md:py-3 text-right font-medium hidden lg:table-cell">Potongan</th>
-                            <th class="px-3 md:px-5 py-2 md:py-3 text-right font-medium">Total</th>
-                            <th class="px-3 md:px-5 py-2 md:py-3 text-center font-medium">Status</th>
-                            <th class="px-3 md:px-5 py-2 md:py-3 text-center font-medium">Aksi</th>
+                            <th class="px-3 md:px-5 py-3 text-left whitespace-nowrap">Nama</th>
+                            <th class="px-3 md:px-5 py-3 text-left whitespace-nowrap hidden sm:table-cell">Posisi</th>
+                            <th class="px-3 md:px-5 py-3 text-right whitespace-nowrap hidden md:table-cell">Gaji pokok</th>
+                            <th class="px-3 md:px-5 py-3 text-right whitespace-nowrap hidden md:table-cell">Tunjangan</th>
+                            <th class="px-3 md:px-5 py-3 text-right whitespace-nowrap hidden lg:table-cell">Potongan</th>
+                            <th class="px-3 md:px-5 py-3 text-right whitespace-nowrap">Total</th>
+                            <th class="px-3 md:px-5 py-3 text-center whitespace-nowrap">Status</th>
+                            <th class="px-3 md:px-5 py-3 text-center whitespace-nowrap">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-50">
