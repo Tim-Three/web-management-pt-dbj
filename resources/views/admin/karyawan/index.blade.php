@@ -266,7 +266,7 @@
     </div>
 
     {{-- Modal Tambah Karyawan --}}
-    <div id="modal-tambah" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+    <div id="modal-tambah" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
         <div class="bg-white rounded-2xl w-full max-w-lg mx-4 p-6 shadow-xl overflow-hidden max-h-screen">
             <div class="flex items-center justify-between mb-5">
                 <h3 class="text-base font-semibold text-gray-800">Tambah karyawan baru</h3>
