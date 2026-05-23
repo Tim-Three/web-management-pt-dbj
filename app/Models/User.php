@@ -50,10 +50,11 @@ class User extends Authenticatable
     /**
      * Apakah sekarang sudah masuk waktu shift?
      */
+    // Sesudah - cek window shift secara penuh
     public function isWaktuShift(): bool
     {
         $now = \Carbon\Carbon::now()->format('H:i:s');
-        return $now >= $this->getJamMulaiShift();
+        return $now >= $this->getJamMulaiShift() && $now < $this->getJamSelesaiShift();
     }
 
     public function isAdmin(): bool

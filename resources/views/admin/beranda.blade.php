@@ -66,21 +66,20 @@
 
 @section('content')
 
-    {{-- Row 1: Stats + Kehadiran Terkini --}}
-    <div class="flex flex-col gap-4 mb-4 md:grid" style="grid-template-columns: 300px 1fr;">
+    {{-- Summary Cards (Format yang konsisten dengan Row 1) --}}
+    <div class="flex flex-col gap-4 mb-6 md:grid md:grid-cols-4">
 
-        {{-- Kiri: Total Karyawan + Detail Kehadiran (Stacked on mobile, stacked on desktop) --}}
-        <div class="flex gap-4 flex-wrap md:flex-nowrap md:flex-col">
+        {{-- Container buat Mobile (Flex Row) / Buat Desktop (Langsung Grid) --}}
+        {{-- Di HP dia bakal bagi dua kolom (50-50), di Desktop dia bakal jadi bagian dari grid 4 kolom --}}
+        <div class="flex flex-row md:contents gap-4">
 
-            {{-- Total Karyawan Card (hijau) --}}
-            {{-- Kita buat w-full supaya icon nggak keluar jalur di HP --}}
-            <div class="bg-green-600 rounded-2xl p-4 md:p-5 flex items-start justify-between min-h-28 w-full">
+            {{-- 1. Total Karyawan Card (Hijau) --}}
+            <div class="bg-green-600 rounded-2xl p-4 md:p-5 flex items-start justify-between min-h-[112px] w-1/2 md:w-full">
                 <div>
-                    <p class="text-green-200 text-xs md:text-sm mb-2 md:mb-3">Total karyawan</p>
-                    <p class="text-5xl md:text-5xl font-bold text-white">{{ $totalKaryawan }}</p>
+                    <p class="text-green-200 text-2xs md:text-xs mb-2 md:mb-3">Total karyawan</p>
+                    <p class="text-3xl md:text-5xl font-bold text-white">{{ $totalKaryawan }}</p>
                 </div>
-                {{-- Icon Container --}}
-                <div class="w-8 h-8 md:w-9 md:h-9 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
+                <div class="min-w-8 h-8 md:w-9 md:h-9 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
                     <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -89,76 +88,43 @@
                 </div>
             </div>
 
-            {{-- Detail Kehadiran Hari Ini --}}
+            {{-- 2. Detail Kehadiran Card (Gabungan Hadir, Telat, Izin di HP) --}}
+            {{-- Di HP ini jadi satu kotak gede sebelah kanan --}}
             <div
-                class="bg-white rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between min-h-28 w-full">
+                class="bg-white rounded-2xl p-4 md:p-5 border border-gray-100 flex items-start justify-between min-h-[112px] w-1/2 md:hidden">
                 <div class="flex-1">
-                    <p class="text-xs text-gray-400 mb-2 md:mb-4">Detail kehadiran hari ini</p>
-                    <div class="flex justify-start gap-6 md:gap-10">
+                    <p class="text-2xs text-gray-400 mb-2">Detail kehadiran <br> hari ini</p>
+                    <div class="flex justify-start gap-3">
                         <div>
-                            <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $hadir }}</p>
-                            <p class="text-xs text-gray-400 mt-1">Hadir</p>
+                            <p class="text-xl font-bold text-gray-800">{{ $hadir }}</p>
+                            <p class="text-[10px] text-gray-400">Hadir</p>
                         </div>
                         <div>
-                            <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $telat }}</p>
-                            <p class="text-xs text-gray-400 mt-1">Telat</p>
+                            <p class="text-xl font-bold text-gray-800">{{ $telat }}</p>
+                            <p class="text-[10px] text-gray-400">Telat</p>
                         </div>
                         <div>
-                            <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ $izin }}</p>
-                            <p class="text-xs text-gray-400 mt-1">Izin</p>
+                            <p class="text-xl font-bold text-gray-800">{{ $izin }}</p>
+                            <p class="text-[10px] text-gray-400">Izin</p>
                         </div>
                     </div>
                 </div>
-                <div class="w-8 h-8 md:w-9 md:h-9 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
-                </div>
             </div>
-        </div>
 
-        {{-- Kanan: Kehadiran Terkini --}}
-        <div class="bg-white rounded-2xl p-4 md:p-5 border border-gray-100 min-h-32">
-            <div class="flex items-center justify-between mb-3 md:mb-4">
-                <p class="text-sm md:text-base font-semibold text-gray-700">Kehadiran terkini</p>
-                <div class="w-8 h-8 md:w-9 md:h-9 bg-gray-100 rounded-xl flex items-center justify-center">
-                    <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                </div>
+            {{-- 3. Tampilan Desktop buat Hadir, Telat, Izin (Terpisah 3 kolom) --}}
+            <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
+                <p class="text-xs text-gray-400 mb-2">Hadir hari ini</p>
+                <p class="text-3xl font-bold text-gray-800">{{ $hadir }}</p>
             </div>
-            <div class="space-y-2 md:space-y-4">
-                @forelse($kehadiranTerkini as $k)
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2 md:gap-3">
-                            <img src="{{ $k->user->foto ? Storage::url($k->user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($k->user->name) . '&background=6366f1&color=fff&size=64' }}"
-                                class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover">
-                            <div>
-                                <div class="flex items-center gap-1 md:gap-2">
-                                    <p class="text-2xs md:text-sm font-medium text-gray-800">{{ $k->user->name }}</p>
-                                    <span
-                                        class="px-1 md:px-2 py-0.5 rounded-full text-3xs md:text-xs font-medium {{ $k->status === 'telat' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600' }}">
-                                        {{ $k->status === 'telat' ? 'Telat hadir' : 'Tepat waktu' }}
-                                    </span>
-                                </div>
-                                <p class="text-3xs md:text-xs text-gray-400">{{ $k->user->posisi ?? 'Karyawan' }}</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-2xs md:text-sm font-semibold text-gray-700">
-                                {{ \Carbon\Carbon::parse($k->jam_masuk)->format('h:i A') }}
-                            </p>
-                            <p class="text-3xs md:text-xs text-gray-400">Check in</p>
-                        </div>
-                    </div>
-                @empty
-                    <p class="text-sm text-gray-400 text-center py-4">Belum ada kehadiran hari ini.</p>
-                @endforelse
+            <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
+                <p class="text-xs text-gray-400 mb-2">Telat hari ini</p>
+                <p class="text-3xl font-bold text-gray-800">{{ $telat }}</p>
             </div>
+            <div class="bg-white rounded-2xl p-5 border border-gray-100 hidden md:block">
+                <p class="text-xs text-gray-400 mb-2">Izin/Cuti hari ini</p>
+                <p class="text-3xl font-bold text-gray-800">{{ $izin }}</p>
+            </div>
+
         </div>
     </div>
 

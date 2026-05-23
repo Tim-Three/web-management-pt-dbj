@@ -32,7 +32,7 @@ class RekapAbsensiController extends Controller
             'alpha' => $absensiList->where('status', 'alpha')->count(),
         ];
 
-        // Hitung hari kerja di bulan itu (Senin-Sabtu, bisa disesuaikan)
+        // Hitung hari kerja di bulan itu (Senin-Jumat)
         $hariKerja = 0;
         $start = Carbon::parse($bulan . '-01');
         $end   = $start->copy()->endOfMonth();
@@ -55,9 +55,9 @@ class RekapAbsensiController extends Controller
         ));
     }
 
-    // Tambahkan method ini di kedua controller
     private function insertAlphaYangBelumAbsen(string $bulan): void
     {
+        $user   = auth()->user();
         $tahun  = substr($bulan, 0, 4);
         $bln    = substr($bulan, 5, 2);
         $start  = \Carbon\Carbon::createFromDate($tahun, $bln, 1)->startOfMonth();
@@ -68,25 +68,27 @@ class RekapAbsensiController extends Controller
             $end = \Carbon\Carbon::yesterday();
         }
 
-        $karyawan = \App\Models\User::where('role', 'karyawan')->get();
+        // Mulai dari tanggal akun dibuat, bukan dari awal bulan
+        $tglDibuat = \Carbon\Carbon::parse($user->created_at)->startOfDay();
+        if ($tglDibuat->gt($start)) {
+            $start = $tglDibuat;
+        }
 
         for ($date = $start->copy(); $date->lte($end); $date->addDay()) {
             // Skip Sabtu & Minggu
             if ($date->isSaturday() || $date->isSunday()) continue;
 
-            foreach ($karyawan as $k) {
-                \App\Models\Absensi::firstOrCreate(
-                    [
-                        'user_id' => $k->id,
-                        'tanggal' => $date->toDateString(),
-                    ],
-                    [
-                        'jam_masuk'  => null,
-                        'jam_pulang' => null,
-                        'status'     => 'alpha',
-                    ]
-                );
-            }
+            \App\Models\Absensi::firstOrCreate(
+                [
+                    'user_id' => $user->id,
+                    'tanggal' => $date->toDateString(),
+                ],
+                [
+                    'jam_masuk'  => null,
+                    'jam_pulang' => null,
+                    'status'     => 'alpha',
+                ]
+            );
         }
     }
 }

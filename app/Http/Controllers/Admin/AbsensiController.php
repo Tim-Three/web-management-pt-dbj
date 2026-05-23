@@ -82,6 +82,10 @@ class AbsensiController extends Controller
             if ($date->isSaturday() || $date->isSunday()) continue;
 
             foreach ($karyawan as $k) {
+                // Skip hari-hari sebelum akun karyawan ini dibuat
+                $tglDibuat = \Carbon\Carbon::parse($k->created_at)->startOfDay();
+                if ($date->lt($tglDibuat)) continue;
+
                 \App\Models\Absensi::firstOrCreate(
                     [
                         'user_id' => $k->id,
